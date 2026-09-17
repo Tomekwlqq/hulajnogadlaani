@@ -18,8 +18,8 @@
   --r:20px; --sh:0 4px 20px rgba(120,88,72,.07);
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--ink);overflow-x:hidden;max-width:100%;
   font-family:'Space Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;
   font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
@@ -68,10 +68,10 @@ h3{font-size:19px;margin:0 0 8px}
 /* --- product cards --- */
 .grid{display:grid;gap:18px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
-  box-shadow:var(--sh);display:flex;flex-direction:column}
+  box-shadow:var(--sh);display:flex;flex-direction:column;min-width:0}
 .ph{background:linear-gradient(180deg,#FDFAF7,#F7F0EA);padding:14px;position:relative;aspect-ratio:4/3;
-  display:flex;align-items:center;justify-content:center}
-.ph img{max-height:100%;width:auto;object-fit:contain;mix-blend-mode:multiply}
+  display:flex;align-items:center;justify-content:center;overflow:hidden}
+.ph img{max-height:100%;max-width:100%;width:auto;height:auto;object-fit:contain;mix-blend-mode:multiply}
 .tag{position:absolute;top:12px;left:12px;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;
   padding:5px 11px;border-radius:999px;background:#fff;border:1px solid var(--line);color:var(--rose-deep)}
 .tag.win{background:var(--rose);border-color:var(--rose);color:#fff}
@@ -102,13 +102,14 @@ h3{font-size:19px;margin:0 0 8px}
 .note p:last-child{margin-bottom:0}
 ul{padding-left:20px;margin:0}
 li{margin-bottom:8px}
-.tbl{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:14px;margin-top:20px;box-shadow:var(--sh)}
-table{border-collapse:collapse;width:100%;min-width:560px}
-th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);font-size:15px}
-th{font-family:'IBM Plex Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.06em;
-  color:var(--ink3);background:#FDFAF7}
-tr:last-child td{border-bottom:0}
-td.n{font-family:'IBM Plex Mono',monospace;font-weight:600;white-space:nowrap}
+.tbl{display:grid;gap:10px;margin-top:20px}
+.drop{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px 17px;box-shadow:var(--sh);
+  display:grid;gap:6px;grid-template-columns:1fr auto;align-items:baseline}
+.drop .m{font-weight:700;font-size:16px}
+.drop .w{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;color:var(--rose-deep);
+  background:var(--rose-soft);border:1px solid rgba(192,132,104,.28);border-radius:999px;padding:3px 10px;white-space:nowrap}
+.drop .r{grid-column:1/-1;font-size:14.5px;color:var(--ink2)}
+@media(min-width:660px){ .tbl{grid-template-columns:repeat(2,1fr)} }
 .q{display:grid;gap:10px;margin-top:20px}
 .qi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px}
 .qi .l{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--rose);letter-spacing:.06em;margin-bottom:5px}
@@ -469,18 +470,13 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);
     <h2><span class="num">ODPADA</span>Czego nie kupować i dlaczego</h2>
     <p class="sub">Modele, które wyskakują w reklamach jako „terenowe”, ale nie przechodzą któregoś z kryteriów.</p>
     <div class="tbl">
-      <table>
-        <thead><tr><th>Model</th><th>Waga</th><th>Dlaczego odpada</th></tr></thead>
-        <tbody>
-          <tr><td>KuKirin G2 Ultra</td><td class="n">31 kg</td><td>2×800 W i 2 659 zł — moc jest, ale to już prawie motocykl do noszenia</td></tr>
-          <tr><td>Segway Ninebot ZT3 Pro</td><td class="n">29,7 kg</td><td>11 cali i 1 600 W, ale waga dyskwalifikuje</td></tr>
-          <tr><td>Sencor Scooter X70</td><td class="n">30,5 kg</td><td>2 999 zł, świetna specyfikacja, 30,5 kg</td></tr>
-          <tr><td>Ausom Laluz 2 Pro</td><td class="n">~27–30 kg</td><td>1 400 W i 90 km zasięgu, ale za ciężka</td></tr>
-          <tr><td>Xiaomi Electric Scooter 5 Pro</td><td class="n">22,4 kg</td><td>Brakuje 0,4 kg do kryterium — waga wprost od producenta</td></tr>
-          <tr><td>KuKirin G2 Pro</td><td class="n">27 kg</td><td>9 cali i silnik 600 W — słabszy od tańszego G2</td></tr>
-          <tr><td>Siver 10 Plus</td><td class="n">19 kg</td><td>Ma jednego sprzedawcę w Polsce i zero opinii. „700 W” to moc szczytowa, nominalna 350 W</td></tr>
-        </tbody>
-      </table>
+      <div class="drop"><div class="m">KuKirin G2 Ultra</div><div class="w">31 kg</div><div class="r">2×800 W i 2 659 zł — moc jest, ale to już prawie motocykl do noszenia</div></div>
+      <div class="drop"><div class="m">Segway Ninebot ZT3 Pro</div><div class="w">29,7 kg</div><div class="r">11 cali i 1 600 W, ale waga dyskwalifikuje</div></div>
+      <div class="drop"><div class="m">Sencor Scooter X70</div><div class="w">30,5 kg</div><div class="r">2 999 zł, świetna specyfikacja, 30,5 kg</div></div>
+      <div class="drop"><div class="m">Ausom Laluz 2 Pro</div><div class="w">~27–30 kg</div><div class="r">1 400 W i 90 km zasięgu, ale za ciężka</div></div>
+      <div class="drop"><div class="m">Xiaomi Electric Scooter 5 Pro</div><div class="w">22,4 kg</div><div class="r">Brakuje 0,4 kg do kryterium — waga wprost od producenta</div></div>
+      <div class="drop"><div class="m">KuKirin G2 Pro</div><div class="w">27 kg</div><div class="r">9 cali i silnik 600 W — słabszy od tańszego G2</div></div>
+      <div class="drop"><div class="m">Siver 10 Plus</div><div class="w">19 kg</div><div class="r">Ma jednego sprzedawcę w Polsce i zero opinii. „700 W” to moc szczytowa, nominalna 350 W</div></div>
     </div>
   </section>
 
