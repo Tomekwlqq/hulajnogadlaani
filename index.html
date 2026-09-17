@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hulajnoga dla Ani · do 3 000 zł, 10 cali, amortyzacja</title>
+<meta name="description" content="Wybór hulajnogi elektrycznej: 10 cali i więcej, amortyzacja, składana, do 22 kg. Sprawdzone dane producentów, ceny i zdjęcia.">
+<meta name="theme-color" content="#FBF6F1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF6F1; --card:#fff; --ink:#2B2326; --ink2:#6B5D5A; --ink3:#9C8D88;
+  --line:#EFE3DA; --rose:#C08468; --rose-deep:#9E6650; --rose-soft:rgba(192,132,104,.10);
+  --gold:#C9A84C; --green:#2E8B57; --green-soft:rgba(46,139,87,.10);
+  --amber:#B07C22; --amber-soft:rgba(176,124,34,.12);
+  --r:20px; --sh:0 4px 20px rgba(120,88,72,.07);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:'Space Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:var(--rose-deep)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 18px 80px}
+
+/* --- topbar --- */
+.bar{position:sticky;top:0;z-index:20;background:rgba(251,246,241,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);padding:10px 18px}
+.bar-in{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-weight:700;font-size:17px;letter-spacing:-.01em;margin-right:auto}
+.brand span{color:var(--rose)}
+.nav{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;padding:2px 0}
+.nav::-webkit-scrollbar{display:none}
+.nav a{white-space:nowrap;font-size:14px;text-decoration:none;color:var(--ink2);background:#fff;
+  border:1px solid var(--line);border-radius:999px;padding:7px 14px}
+.nav a:active{background:var(--rose-soft);border-color:var(--rose)}
+
+/* --- hero --- */
+header{padding:44px 0 8px}
+h1{font-size:clamp(32px,8.5vw,52px);line-height:1.08;letter-spacing:-.03em;margin:0 0 14px}
+h1 em{font-style:normal;color:var(--rose)}
+.lead{font-size:clamp(17px,4.4vw,20px);color:var(--ink2);margin:0 0 22px;max-width:760px}
+.crit{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.crit span{font-family:'IBM Plex Mono',monospace;font-size:13px;background:#fff;border:1px solid var(--line);
+  border-radius:999px;padding:8px 13px;color:var(--ink2)}
+.crit span b{color:var(--ink)}
+
+/* --- sections --- */
+section{margin-top:56px;scroll-margin-top:64px}
+h2{font-size:clamp(24px,6vw,33px);letter-spacing:-.02em;margin:0 0 8px}
+h2 .num{font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--rose);display:block;margin-bottom:6px;letter-spacing:.08em}
+.sub{color:var(--ink2);margin:0 0 24px;max-width:800px}
+h3{font-size:19px;margin:0 0 8px}
+
+/* --- pick cards --- */
+.picks{display:grid;gap:14px}
+.pick{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;
+  display:flex;gap:16px;align-items:center;box-shadow:var(--sh)}
+.pick .em{font-size:34px;line-height:1}
+.pick .t{font-weight:700;font-size:18px}
+.pick .p{font-family:'IBM Plex Mono',monospace;font-size:15px;color:var(--rose-deep);font-weight:600}
+.pick .d{font-size:15px;color:var(--ink2)}
+.pick .px{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:17px;white-space:nowrap}
+
+/* --- product cards --- */
+.grid{display:grid;gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+  box-shadow:var(--sh);display:flex;flex-direction:column}
+.ph{background:linear-gradient(180deg,#FDFAF7,#F7F0EA);padding:14px;position:relative;aspect-ratio:4/3;
+  display:flex;align-items:center;justify-content:center}
+.ph img{max-height:100%;width:auto;object-fit:contain;mix-blend-mode:multiply}
+.tag{position:absolute;top:12px;left:12px;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;
+  padding:5px 11px;border-radius:999px;background:#fff;border:1px solid var(--line);color:var(--rose-deep)}
+.tag.win{background:var(--rose);border-color:var(--rose);color:#fff}
+.tag.ter{background:#3F4A44;border-color:#3F4A44;color:#F3EFE9}
+.bd{padding:18px;display:flex;flex-direction:column;flex:1}
+.name{font-weight:700;font-size:19px;letter-spacing:-.01em;margin-bottom:6px}
+.price{font-family:'IBM Plex Mono',monospace;font-size:17px;font-weight:600;color:var(--rose-deep);margin-bottom:12px}
+.specs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.specs i{font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-style:normal;color:var(--ink2);
+  background:#FAF6F2;border:1px solid var(--line);border-radius:8px;padding:5px 9px}
+.specs i b{color:var(--ink);font-weight:600}
+.specs i.hi{background:var(--green-soft);border-color:rgba(46,139,87,.28);color:var(--green)}
+.specs i.warn{background:var(--amber-soft);border-color:rgba(176,124,34,.3);color:var(--amber)}
+.why{font-size:15px;color:var(--ink2);margin:0 0 16px}
+.why b{color:var(--ink)}
+.cta{margin-top:auto;display:inline-flex;align-items:center;gap:7px;text-decoration:none;font-weight:600;font-size:15px;
+  background:var(--rose-soft);color:var(--rose-deep);border:1px solid rgba(192,132,104,.3);border-radius:12px;
+  padding:12px 16px;justify-content:center}
+.cta:active{background:var(--rose);color:#fff;border-color:var(--rose)}
+
+/* --- callout / notes --- */
+.note{background:#fff;border:1px solid var(--line);border-left:5px solid var(--rose);border-radius:14px;
+  padding:20px 22px;margin-top:24px;box-shadow:var(--sh)}
+.note.dark{background:#3F4A44;border-color:#3F4A44;border-left-color:var(--gold);color:#F3EFE9}
+.note.dark h3{color:#fff}
+.note.dark p,.note.dark li{color:#E4DCD4}
+.note h3{margin-bottom:6px}
+.note p:last-child{margin-bottom:0}
+ul{padding-left:20px;margin:0}
+li{margin-bottom:8px}
+.tbl{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:14px;margin-top:20px;box-shadow:var(--sh)}
+table{border-collapse:collapse;width:100%;min-width:560px}
+th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);font-size:15px}
+th{font-family:'IBM Plex Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.06em;
+  color:var(--ink3);background:#FDFAF7}
+tr:last-child td{border-bottom:0}
+td.n{font-family:'IBM Plex Mono',monospace;font-weight:600;white-space:nowrap}
+.q{display:grid;gap:10px;margin-top:20px}
+.qi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.qi .l{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--rose);letter-spacing:.06em;margin-bottom:5px}
+footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);
+  font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink3);line-height:1.8}
+@media(min-width:660px){
+  .wrap{padding:0 26px 90px}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .picks{grid-template-columns:repeat(3,1fr)}
+  .pick{flex-direction:column;align-items:flex-start;gap:6px}
+  .pick .px{margin-left:0}
+}
+@media(min-width:980px){ .grid{grid-template-columns:repeat(3,1fr)} }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-in">
+    <div class="brand">Hulajnoga <span>dla Ani</span></div>
+    <nav class="nav">
+      <a href="#wybor">Szybki wybór</a>
+      <a href="#do22">Do 22 kg</a>
+      <a href="#teren">Prawdziwy teren</a>
+      <a href="#odpada">Odpada</a>
+      <a href="#przepisy">Zanim kupisz</a>
+      <a href="#dane">Skąd dane</a>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header>
+    <h1>Hulajnoga <em>dla Ani</em></h1>
+    <p class="lead">Przeczesane 69 modeli z polskich sklepów. Poniżej te, które naprawdę spełniają kryteria: jazda także poza asfaltem, duże koła, amortyzacja i składana konstrukcja.</p>
+    <div class="crit">
+      <span><b>do 3 000 zł</b></span>
+      <span>koła <b>10&quot; i więcej</b></span>
+      <span><b>amortyzacja</b> przód i tył</span>
+      <span><b>składana</b></span>
+      <span>waga <b>do 22 kg</b></span>
+    </div>
+    <p class="lead" style="font-size:16px;margin-bottom:0">Waga nie jest tu przypadkiem: to ona decyduje, czy hulajnogę wniesiesz po schodach i zmieścisz w bagażniku. Dlatego lista jest ułożona od najlżejszych, a przy każdym modelu jest napisane, do czego realnie wystarczy.</p>
+  </header>
+
+  <section id="wybor">
+    <h2><span class="num">WYBÓR NA SKRÓTY</span>Trzy, które warto rozważyć</h2>
+    <p class="sub">Jeżeli nie chcesz czytać całości — te trzy pokrywają wszystkie scenariusze.</p>
+    <div class="picks">
+      <div class="pick">
+        <div class="em">🥇</div>
+        <div>
+          <div class="t">Segway Ninebot F3 Pro D</div>
+          <div class="d">Najlepszy kompromis: hamulce tarczowe przód i tył, pełna amortyzacja, wodoszczelność IPX6, 19,3 kg.</div>
+        </div>
+        <div class="px">2 559 zł</div>
+      </div>
+      <div class="pick">
+        <div class="em">🪶</div>
+        <div>
+          <div class="t">Motus Scooty 10 Pro</div>
+          <div class="d">19 kg, mocny silnik 600 W, polska marka z serwisem. Najlepszy stosunek tego, co daje, do ceny.</div>
+        </div>
+        <div class="px">1 999 zł</div>
+      </div>
+      <div class="pick">
+        <div class="em">⛰️</div>
+        <div>
+          <div class="t">Motus Daytona 10</div>
+          <div class="d">Prawdziwy teren: 1 000 W, opony pneumatyczne, tarcze z przodu i z tyłu. Waży 26 kg.</div>
+        </div>
+        <div class="px">2 199 zł</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="do22">
+    <h2><span class="num">SEKCJA 1 · WAGA DO 22 KG</span>Uniwersalne — miasto i lekki teren</h2>
+    <p class="sub">Szuter, ścieżki leśne, krawężniki, trawa. Lekkie na tyle, żeby wnieść je po schodach i włożyć do bagażnika. Ułożone od najlepszych.</p>
+    <div class="grid">
+
+      <article class="card">
+        <div class="ph"><span class="tag win">Wybór nr 1</span><img src="img/segway-f3-pro-d.jpg" alt="Segway Ninebot F3 Pro D" loading="lazy"></div>
+        <div class="bd">
+          <div class="name">Segway Ninebot F3 Pro D</div>
+          <div class="price">2 559 zł</div>
+          <div class="specs">
+            <i><b>19,3 kg</b></i>
+            <i>koła <b>10&quot;</b> bezdętkowe</i>
+            <i>silnik <b>500 W</b> (1 200 W)</i>
+            <i class="hi">przód + tył</i>
+            <i class="hi">tarcza + tarcza</i>
+            <i>70 km</i>
+            <i class="hi">podjazd 24°</i>
+            <i class="hi">IPX6</i>
+          </div>
+          <p class="why">Najwięcej rzeczy, które w terenie pracują, w najmniejszej wadze: <b>hamulce tarczowe z obu stron</b>, pełna amortyzacja, opony bezdętkowe (rzadziej łapią kapcia) i najwyższa w zestawieniu wodoszczelność. Do tego kierunkowskazy, ekran i 24 miesiące gwarancji.</p>
+          <a class="cta" href="https://www.ceneo.pl/183881186" target="_blank" rel="noopener">Zobacz oferty →</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="ph"><span class="tag">Najlepsza cena za moc</span><img src="img/motus-scooty-10-pro.jpg" alt="Motus Scooty 10 Pro" loading="lazy"></div>
+        <div class="bd">
+          <div class="name">Motus Scooty 10 Pro</div>
+          <div class="price">1 999 zł</div>
+          <div class="specs">
+            <i><b>19 kg</b></i>
+            <i>koła <b>10&quot;</b> dętkowe</i>
+            <i>silnik <b>600 W</b> (800 W)</i>
+            <i class="hi">przód + tył</i>
+            <i class="warn">tarcza tył + bęben przód</i>
+            <i>70 km</i>
+            <i>IP45</i>
+          </div>
+          <p class="why">Najmocniejszy silnik w tej wadze — 600 W nominalnie, czyli więcej niż droższy Segway. Polska marka z serwisem w Krakowie. <b>Kompromis:</b> hamulec z przodu bębnowy, nie tarczowy.</p>
+          <a class="cta" href="https://www.ceneo.pl/194222517" target="_blank" rel="noopener">Zobacz oferty →</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="ph"><span class="tag">Najlepszy stosunek ceny</span><img src="img/motus-scooty-10-max.jpg" alt="Motus Scooty 10 Max" loading="lazy"></div>
+        <div class="bd">
+          <div class="name">Motus Scooty 10 Max</div>
+          <div class="price">2 299 zł</div>
+          <div class="specs">
+            <i><b>21 kg</b></i>
+            <i>koła <b>10&quot;</b> dętkowe</i>
+            <i>silnik <b>800 W</b></i>
+            <i class="hi">przód + tył + sprężyny</i>
+            <i>tarcza tył + bęben przód</i>
+            <i>80 km</i>
+            <i class="hi">podjazd 20°</i>
+          </div>
+          <p class="why"><b>To jest ten model ze środka stawki</b> — 800 W i 20° podjazdu przy 21 kg, czyli moc zbliżona do hulajnóg 25-kilogramowych, a waga jeszcze do noszenia. Najwięcej zasięgu w całej sekcji.</p>
+          <a class="cta" href="https://www.ceneo.pl/195866601" target="_blank" rel="noopener">Zobacz oferty →</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="ph"><img src="img/navee-v60i-pro.jpg" alt="Navee V60i Pro" loading="lazy"></div>
+        <div class="bd">
+          <div class="name">Navee V60i Pro</div>
+          <div class="price">1 599 zł</div>
+          <div class="specs">
+            <i><b>19 kg</b></i>
+            <i>koła <b>10&quot;</b></i>
+            <i>silnik 400 W</i>
+            <i class="hi">przód + tył</i>
+            <i class="warn">hamulec bębnowy</i>
+            <i>60 km</i>
+          </div>
+          <p class="why">Najtańsza sensowna propozycja: lekka, pełna amortyzacja, przyzwoity zasięg. Silnik 400 W wystarczy na miasto i równe ścieżki — na strome podjazdy już nie.</p>
+          <a class="cta" href="https://www.ceneo.pl/195240429" target="_blank" rel="noopener">Zobacz oferty →</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="ph"><img src="img/ruptor-r1-lite-v2.jpg" alt="Ruptor R1 Lite v2" loading="lazy"></div>
+        <div class="bd">
+          <div class="name">Ruptor R1 Lite v2</div>
+          <div class="price">1 604 zł</div>
+          <div class="specs">
+            <i><b>21 kg</b></i>
+            <i>koła <b>10&quot;</b></i>
+            <i>silnik 500 W</i>
+            <i class="hi">przód + tył</i>
+            <i class="hi">hamulec tarczowy</i>
+            <i>60 km</i>
+            <i>podjazd 20°</i>
+          </div>
+          <p class="why">Kompletny osprzęt jak w droższych: tarcza, pełna amortyzacja, aplikacja, tempomat, 20° podjazdu. Za niecałe 1 650 zł.</p>
+          <a class="cta" href="https://www.ceneo.pl/175358034" target="_blank" rel="noopener">Zobacz oferty →</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="ph"><img src="img/sencor-x30.jpg" alt="Sencor Scooter X30" loading="lazy"></div>
+        <div class="bd">
+          <div class="name">Sencor Scooter X30</div>
+          <div class="price">1 893 zł</div>
+          <div class="specs">
+            <i><b>22 kg</b></i>
+            <i>koła <b>10&quot;</b></i>
+            <i>silnik 500 W</i>
+            <i class="hi">przód + tył</i>
+            <i class="hi">hamulec tarczowy</i>
+            <i>45 km</i>
+          </div>
+          <p class="why">Jedyny w zestawieniu oznaczony przez sprzedawców jako <b>terenowy</b>. Firma z Unii Europejskiej, więc serwis i części nie są egzotyką. Waga dokładnie na granicy 22 kg.</p>
+          <a class="cta" href="https://www.ceneo.pl/184657298" target="_blank" rel="noopener">Zobacz oferty →</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="ph"><img src="img/xiaomi-5.jpg" alt="Xiaomi Electric Scooter 5" loading="lazy"></div>
+        <div class="bd">
+          <div class="name">Xiaomi Electric Scooter 5</div>
+          <div class="price">1 425 zł</div>
+          <div class="specs">
+            <i><b>20,1 kg</b></i>
+            <i>koła <b>10&quot;</b> bezdętkowe</i>
+            <i>silnik 350 W (700 W)</i>
+            <i class="warn">tylko przód</i>
+            <i>hamulec bęben + E-ABS</i>
+            <i>60 km</i>
+          </div>
+          <p class="why">Najtańsza z pewnym zapleczem: marka wszędzie dostępna, części i serwis w każdym mieście. <b>Ale amortyzacja tylko z przodu</b> — na dłuższą jazdę po nierównym wykluczona.</p>
+          <a class="cta" href="https://www.ceneo.pl/181102154" target="_blank" rel="noopener">Zobacz oferty →</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="ph"><img src="img/skateflash-sk-urban.jpg" alt="Skateflash SK Urban" loading="lazy"></div>
+        <div class="bd">
+          <div class="name">Skateflash SK Urban</div>
+          <div class="price">2 040 zł</div>
+          <div class="specs">
+            <i><b>19 kg</b></i>
+            <i>koła <b>10&quot;</b></i>
+            <i>silnik 500 W</i>
+            <i class="hi">przód + tył</i>
+            <i class="hi">hamulec tarczowy</i>
+            <i>40 km</i>
+          </div>
+          <p class="why">Lekka, dobrze oceniana przez użytkowników, z pełną amortyzacją i tarczą. Minus: mniejszy zasięg i mniejsza sieć serwisowa.</p>
+          <a class="cta" href="https://www.ceneo.pl/182357471" target="_blank" rel="noopener">Zobacz oferty →</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="teren">
+    <h2><span class="num">SEKCJA 2 · WAGA 23–26 KG</span>Prawdziwy teren</h2>
+    <p class="sub">Tu zaczyna się sprzęt, który pojedzie po błocie, korzeniach i stromym podjeździe. Cena, którą płacisz, to waga — i dlatego te modele są ciężkie. To nie luka w rynku, to fizyka: duże opony, dwa amortyzatory, mocny silnik i duży akumulator ważą razem 25–26 kg.</p>
+    <div class="grid">
+
+      <article class="card">
+        <div class="ph"><span class="tag ter">Rekomendacja terenowa</span><img src="img/motus-daytona-10.jpg" alt="Motus Daytona 10" loading="lazy"></div>
+        <div class="bd">
+          <div class="name">Motus Daytona 10</div>
+          <div class="price">2 199 zł</div>
+          <div class="specs">
+            <i class="warn"><b>26 kg</b></i>
+            <i>koła <b>10&quot;</b> pneumatyczne</i>
+            <i>silnik <b>1 000 W</b></i>
+            <i class="hi">przód + tył</i>
+            <i class="hi">tarcza + tarcza</i>
+            <i>60 km</i>
+          </div>
+          <p class="why">Najtańszy prawdziwie terenowy: 1 000 W, <b>opony pneumatyczne dętkowe</b> (najlepsza trakcja na szutrze i piachu) i hamulce tarczowe z obu stron. Polska marka, serwis w Krakowie.</p>
+          <a class="cta" href="https://www.ceneo.pl/195845146" target="_blank" rel="noopener">Zobacz oferty →</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="ph"><img src="img/kamikaze-k1.jpg" alt="Kamikaze K1" loading="lazy"></div>
+        <div class="bd">
+          <div class="name">Kamikaze K1</div>
+          <div class="price">2 399 zł</div>
+          <div class="specs">
+            <i class="warn"><b>25,4 kg</b></i>
+            <i>koła <b>10&quot;</b> bezdętkowe</i>
+            <i>silnik <b>1 000 W</b> (1 400 W)</i>
+            <i class="hi">przód + tył</i>
+            <i class="hi">tarcza + tarcza</i>
+            <i>60 km</i>
+          </div>
+          <p class="why">Mocniejszy silnik niż Daytona i opony bezdętkowe (rzadziej kapcie), przy 25,4 kg. Nazwa „Kamikaze” w nazwie nie ukrywa, że to sprzęt z charakterem.</p>
+          <a class="cta" href="https://www.ceneo.pl/180826505" target="_blank" rel="noopener">Zobacz oferty →</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="ph"><span class="tag">Najwięcej zasięgu</span><img src="img/kamikaze-k1-plus.jpg" alt="Kamikaze K1 Plus" loading="lazy"></div>
+        <div class="bd">
+          <div class="name">Kamikaze K1 Plus 1000 W</div>
+          <div class="price">2 849 zł</div>
+          <div class="specs">
+            <i class="warn"><b>26,2 kg</b></i>
+            <i>koła <b>10&quot;</b></i>
+            <i>silnik <b>1 000 W</b> (1 400 W)</i>
+            <i class="hi">przód + tył</i>
+            <i class="hi">tarcza + tarcza</i>
+            <i class="hi">80 km</i>
+          </div>
+          <p class="why">Ta sama moc co K1, ale bateria daje <b>80 km</b> — największy zasięg w zestawieniu. Opony opisane jako miejskie, więc na głębokie błoto to nie jest bestia.</p>
+          <a class="cta" href="https://www.ceneo.pl/180827994" target="_blank" rel="noopener">Zobacz oferty →</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="ph"><img src="img/kukirin-g2.jpg" alt="KuKirin G2" loading="lazy"></div>
+        <div class="bd">
+          <div class="name">KuKirin G2 (wersja 2026)</div>
+          <div class="price">2 099 zł</div>
+          <div class="specs">
+            <i class="warn"><b>26 kg</b></i>
+            <i>koła <b>10&quot;</b> terenowe próżniowe</i>
+            <i>silnik 800 W</i>
+            <i class="hi">4-ramienny amortyzator</i>
+            <i class="hi">tarcza + tarcza</i>
+            <i>55 km</i>
+          </div>
+          <p class="why">Jedyne w zestawieniu <b>opony terenowe</b> fabrycznie i czteroramienny amortyzator — konstrukcja pomyślana pod grunt. Uwaga na wersję: sklepy podają różną wagę.</p>
+          <a class="cta" href="https://www.kukirin-scooter.pl/products/hulajnoga-elektryczna-kukirin-g2" target="_blank" rel="noopener">Sklep producenta →</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="ph"><img src="img/kamikaze-k1-lite.jpg" alt="Kamikaze K1 Lite" loading="lazy"></div>
+        <div class="bd">
+          <div class="name">Kamikaze K1 Lite</div>
+          <div class="price">1 999 zł</div>
+          <div class="specs">
+            <i class="warn"><b>25 kg</b></i>
+            <i>koła <b>10&quot;</b> bezdętkowe</i>
+            <i>silnik 800 W</i>
+            <i class="hi">przód + tył</i>
+            <i class="hi">tarcza + tarcza</i>
+            <i>60 km</i>
+          </div>
+          <p class="why">Najtańszy sposób, żeby wejść w klasę terenową: pełna amortyzacja, dwie tarcze i 800 W. <b>Uwaga na dane:</b> sklep producenta podaje 25 kg, porównywarka 27 kg — przed zakupem warto potwierdzić.</p>
+          <a class="cta" href="https://www.ceneo.pl/186126250" target="_blank" rel="noopener">Zobacz oferty →</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="ph"><img src="img/navee-gt3-max.jpg" alt="Navee GT3 Max" loading="lazy"></div>
+        <div class="bd">
+          <div class="name">Navee GT3 Max</div>
+          <div class="price">1 949 zł</div>
+          <div class="specs">
+            <i class="warn"><b>23 kg</b></i>
+            <i>koła <b>10&quot;</b> bezdętkowe</i>
+            <i>silnik 250 W (1 000 W)</i>
+            <i class="hi">przód + tył + sprężyny</i>
+            <i>75 km</i>
+            <i class="warn">podjazd 12°</i>
+          </div>
+          <p class="why">Najlżejszy w tej sekcji i z najdłuższym zasięgiem, ale <b>silnik ma tylko 250 W nominalnie</b> — to hulajnoga „długa trasa po równym”, nie wspinaczka. Dlatego jest niżej.</p>
+          <a class="cta" href="https://www.ceneo.pl/189755801" target="_blank" rel="noopener">Zobacz oferty →</a>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="note dark">
+      <h3>„A czemu nie KuKirin G2 Pro?”</h3>
+      <p>Sprawdziłem u producenta i tu jest niespodzianka: <b>G2 Pro jest słabszy od zwykłego G2</b>. G2 ma silnik 800 W (2 099 zł), a G2 Pro — <b>600 W</b> za tę samą cenę. Do tego Pro ma koła <b>9 cali</b>, czyli poniżej progu 10&quot;, waży 27 kg i jest sprzedawany z fotelikiem, czyli jako wygodna hulajnoga miejska — z siedzeniem.</p>
+      <p style="margin-bottom:0">Więc: G2 Pro odpada nie na wadze, tylko na tym, że jest <b>wolniejszy i mniejszy na kołach</b> od tańszego G2. Jeżeli już KuKirin, to albo G2 (800 W, opony terenowe), albo G2 Ultra (2×800 W, 2 659 zł, ale 31 kg).</p>
+    </div>
+  </section>
+
+  <section id="odpada">
+    <h2><span class="num">ODPADA</span>Czego nie kupować i dlaczego</h2>
+    <p class="sub">Modele, które wyskakują w reklamach jako „terenowe”, ale nie przechodzą któregoś z kryteriów.</p>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Model</th><th>Waga</th><th>Dlaczego odpada</th></tr></thead>
+        <tbody>
+          <tr><td>KuKirin G2 Ultra</td><td class="n">31 kg</td><td>2×800 W i 2 659 zł — moc jest, ale to już prawie motocykl do noszenia</td></tr>
+          <tr><td>Segway Ninebot ZT3 Pro</td><td class="n">29,7 kg</td><td>11 cali i 1 600 W, ale waga dyskwalifikuje</td></tr>
+          <tr><td>Sencor Scooter X70</td><td class="n">30,5 kg</td><td>2 999 zł, świetna specyfikacja, 30,5 kg</td></tr>
+          <tr><td>Ausom Laluz 2 Pro</td><td class="n">~27–30 kg</td><td>1 400 W i 90 km zasięgu, ale za ciężka</td></tr>
+          <tr><td>Xiaomi Electric Scooter 5 Pro</td><td class="n">22,4 kg</td><td>Brakuje 0,4 kg do kryterium — waga wprost od producenta</td></tr>
+          <tr><td>KuKirin G2 Pro</td><td class="n">27 kg</td><td>9 cali i silnik 600 W — słabszy od tańszego G2</td></tr>
+          <tr><td>Siver 10 Plus</td><td class="n">19 kg</td><td>Ma jednego sprzedawcę w Polsce i zero opinii. „700 W” to moc szczytowa, nominalna 350 W</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="przepisy">
+    <h2><span class="num">ZANIM KUPISZ</span>Sześć rzeczy, które warto wiedzieć</h2>
+    <div class="q">
+      <div class="qi"><div class="l">1 · OPONY</div><p style="margin:0">Tylko pneumatyczne — dętkowe albo bezdętkowe. Opony pełne (lite) przenoszą każde uderzenie w ramę i w nadgarstki. To najważniejsza różnica między hulajnogą na asfalt i na szuter.</p></div>
+      <div class="qi"><div class="l">2 · CIŚNIENIE</div><p style="margin:0">Start 2,5–3,0 bar. Na szuter i piasek zejść do ok. 2,0 bar — trakcja rośnie. Warto wozić małą pompkę.</p></div>
+      <div class="qi"><div class="l">3 · WAGA</div><p style="margin:0">Deklaracje producentów są „netto”. Realnie dolicz 1–2 kg na błotniki, uchwyt i zamek. Przy progu 22 kg to różnica, którą czuć na schodach.</p></div>
+      <div class="qi"><div class="l">4 · PRĘDKOŚĆ</div><p style="margin:0">20 km/h to granica zgodna z przepisami. Segway, Motus, Navee i Xiaomi tyle jadą. Modele KuKirin czy Kamikaze potrafią 45 km/h — to sprzęt poza prawem na chodniku i drodze.</p></div>
+      <div class="qi"><div class="l">5 · NOWE PRZEPISY</div><p style="margin:0">Od 3 marca 2026 obowiązuje minimalny wiek 13 lat i kask do 16. roku życia.</p></div>
+      <div class="qi"><div class="l">6 · SERWIS</div><p style="margin:0">W terenie najczęściej padają dętki, łożyska kół i linki hamulców. Marka z szeroką siecią serwisową to tygodnie różnicy w naprawie — dlatego Segway, Motus i Xiaomi są wyżej niż równie dobre, ale egzotyczne marki.</p></div>
+    </div>
+  </section>
+
+  <section id="dane">
+    <h2><span class="num">SKĄD DANE</span>Ile w tym pewności</h2>
+    <p class="sub">Żeby było jasne, które liczby są twarde, a które warte sprawdzenia.</p>
+    <div class="q">
+      <div class="qi"><div class="l">PRZESIEW</div><p style="margin:0">69 modeli z polskich sklepów spełniało kryteria koła 10&quot;+ i składana konstrukcja. Z tego 9 mieści się w 22 kg, a 6 w przedziale 23–26 kg.</p></div>
+      <div class="qi"><div class="l">🟢 TWARDE</div><p style="margin:0">Waga, silnik, koła, hamulce i amortyzacja sprawdzone u producentów i w danych technicznych sklepów dla: Segway F3 Pro D, Motus Daytona 10 i Scooty 10 Max, Kamikaze K1 / K1 Plus / K1 Lite, Navee GT3 Max, KuKirin G2 i G2 Pro, Xiaomi 5.</p></div>
+      <div class="qi"><div class="l">🟡 DO SPRAWDZENIA</div><p style="margin:0">Dwie rozbieżności w danych, które znalazłem: Kamikaze K1 Lite — 25 kg (sklep) vs 27 kg (porównywarka) oraz KuKirin G2 — 26 kg (producent) vs 22 kg (porównywarka). W obu przypadkach podaję wersję producenta.</p></div>
+      <div class="qi"><div class="l">⚪ CZEGO NIE WIEM</div><p style="margin:0">Szerokość opony i skok zawieszenia nie są publikowane nigdzie. A to dwa parametry, które w cięższym terenie decydują najbardziej.</p></div>
+      <div class="qi"><div class="l">CENY</div><p style="margin:0">Stan na 12 września 2026. W tej kategorii ceny ruszają się o 300–500 zł przy promocjach, więc każdy kafelek prowadzi do aktualnych ofert.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    Hulajnoga dla Ani · przygotowane 12.09.2026<br>
+    Źródła: dane techniczne producentów (Segway, Motus, KuKirin, Kamikaze, Navee, Xiaomi, Sencor) oraz porównywarka cenowa Ceneo.pl.<br>
+    Zakres: koła 10&quot; i więcej · amortyzacja przód i tył · składana · do 3 000 zł
+  </footer>
+</div>
+</body>
+</html>
