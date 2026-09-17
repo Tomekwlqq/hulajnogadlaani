@@ -108,15 +108,16 @@ ul{padding-left:20px;margin:0}
 li{margin-bottom:8px}
 .tbl{display:grid;gap:12px;margin-top:20px}
 .drop{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:var(--sh);
-  display:grid;gap:4px 14px;align-items:center;
-  grid-template-columns:84px 1fr auto;grid-template-areas:"ph m w" "ph r r"}
+  display:grid;gap:6px 14px;align-items:center;
+  grid-template-columns:84px 1fr;grid-template-areas:"ph hd" "ph r"}
+.drop .hd{grid-area:hd;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline;justify-content:space-between}
 .drop .ph2{grid-area:ph;width:84px;height:84px;border-radius:12px;background:#F7F0EA;overflow:hidden;
   display:flex;align-items:center;justify-content:center}
 .drop .ph2 img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;mix-blend-mode:multiply}
-.drop .m{grid-area:m;font-weight:700;font-size:16.5px;align-self:end}
-.drop .w{grid-area:w;font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;color:var(--rose-deep);
+.drop .m{font-weight:700;font-size:16.5px}
+.drop .w{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;color:var(--rose-deep);
   background:var(--rose-soft);border:1px solid rgba(192,132,104,.28);border-radius:999px;padding:4px 11px;
-  white-space:nowrap;align-self:end}
+  white-space:nowrap}
 .drop .r{grid-area:r;font-size:14.5px;color:var(--ink2);align-self:start}
 @media(min-width:660px){ .tbl{grid-template-columns:repeat(2,1fr)} }
 .q{display:grid;gap:10px;margin-top:20px}
@@ -481,31 +482,31 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);
     <div class="tbl">
       <div class="drop">
         <div class="ph2"><img src="img/kukirin-g2-ultra.jpg" alt="KuKirin G2 Ultra" width="400" height="400" loading="lazy"></div>
-        <div class="m">KuKirin G2 Ultra</div><div class="w">31 kg</div><div class="r">2×800 W i 2 659 zł — moc jest, ale to już prawie motocykl do noszenia</div>
+        <div class="hd"><div class="m">KuKirin G2 Ultra</div><div class="w">31 kg</div></div><div class="r">2×800 W i 2 659 zł — moc jest, ale to już prawie motocykl do noszenia</div>
       </div>
       <div class="drop">
         <div class="ph2"><img src="img/segway-zt3-pro.jpg" alt="Segway Ninebot ZT3 Pro" width="400" height="400" loading="lazy"></div>
-        <div class="m">Segway Ninebot ZT3 Pro</div><div class="w">29,7 kg</div><div class="r">11 cali i 1 600 W, ale waga dyskwalifikuje</div>
+        <div class="hd"><div class="m">Segway Ninebot ZT3 Pro</div><div class="w">29,7 kg</div></div><div class="r">11 cali i 1 600 W, ale waga dyskwalifikuje</div>
       </div>
       <div class="drop">
         <div class="ph2"><img src="img/sencor-x70.jpg" alt="Sencor Scooter X70" width="400" height="400" loading="lazy"></div>
-        <div class="m">Sencor Scooter X70</div><div class="w">30,5 kg</div><div class="r">2 999 zł, świetna specyfikacja, 30,5 kg</div>
+        <div class="hd"><div class="m">Sencor Scooter X70</div><div class="w">30,5 kg</div></div><div class="r">Najmocniejszy silnik w zestawieniu, ale 30,5 kg — nie do noszenia po schodach</div>
       </div>
       <div class="drop">
         <div class="ph2"><img src="img/ausom-laluz-2-pro.jpg" alt="Ausom Laluz 2 Pro" width="400" height="400" loading="lazy"></div>
-        <div class="m">Ausom Laluz 2 Pro</div><div class="w">~27–30 kg</div><div class="r">1 400 W i 90 km zasięgu, ale za ciężka</div>
+        <div class="hd"><div class="m">Ausom Laluz 2 Pro</div><div class="w">~27–30 kg</div></div><div class="r">1 400 W i 90 km zasięgu, ale za ciężka</div>
       </div>
       <div class="drop">
         <div class="ph2"><img src="img/xiaomi-5-pro.jpg" alt="Xiaomi Electric Scooter 5 Pro" width="400" height="400" loading="lazy"></div>
-        <div class="m">Xiaomi Electric Scooter 5 Pro</div><div class="w">22,4 kg</div><div class="r">Brakuje 0,4 kg do kryterium — waga wprost od producenta</div>
+        <div class="hd"><div class="m">Xiaomi Electric Scooter 5 Pro</div><div class="w">22,4 kg</div></div><div class="r">Brakuje 0,4 kg do kryterium — waga wprost od producenta</div>
       </div>
       <div class="drop">
         <div class="ph2"><img src="img/kukirin-g2-pro.jpg" alt="KuKirin G2 Pro" width="400" height="400" loading="lazy"></div>
-        <div class="m">KuKirin G2 Pro</div><div class="w">27 kg</div><div class="r">9 cali i silnik 600 W — słabszy od tańszego G2</div>
+        <div class="hd"><div class="m">KuKirin G2 Pro</div><div class="w">27 kg</div></div><div class="r">9 cali i silnik 600 W — słabszy od tańszego G2</div>
       </div>
       <div class="drop">
         <div class="ph2"><img src="img/siver-10-plus.jpg" alt="Siver 10 Plus" width="400" height="400" loading="lazy"></div>
-        <div class="m">Siver 10 Plus</div><div class="w">19 kg</div><div class="r">Ma jednego sprzedawcę w Polsce i zero opinii. „700 W” to moc szczytowa, nominalna 350 W</div>
+        <div class="hd"><div class="m">Siver 10 Plus</div><div class="w">19 kg</div></div><div class="r">Ma jednego sprzedawcę w Polsce i zero opinii. „700 W” to moc szczytowa, nominalna 350 W</div>
       </div>
     </div>
   </section>
