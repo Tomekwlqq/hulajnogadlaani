@@ -29,13 +29,16 @@ a{color:var(--rose-deep)}
 /* --- topbar --- */
 .bar{position:sticky;top:0;z-index:20;background:rgba(251,246,241,.92);backdrop-filter:blur(10px);
   border-bottom:1px solid var(--line);padding:10px 18px}
-.bar-in{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.brand{font-weight:700;font-size:17px;letter-spacing:-.01em;margin-right:auto}
-.brand span{color:var(--rose)}
+.bar-in{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.brand{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;letter-spacing:-.01em;
+  color:var(--ink2);margin-right:auto;white-space:nowrap}
+.brand b{color:var(--rose)}
+.navlab{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em}
 .nav{display:flex;gap:7px;flex-wrap:wrap;padding:2px 0}
-.nav a{white-space:nowrap;font-size:14px;text-decoration:none;color:var(--ink2);background:#fff;
-  border:1px solid var(--line);border-radius:999px;padding:7px 14px}
+.nav a{white-space:nowrap;font-family:'IBM Plex Mono',monospace;font-size:13px;text-decoration:none;color:var(--ink2);background:#fff;
+  border:1px solid var(--line);border-radius:999px;padding:6px 13px}
 .nav a:active{background:var(--rose-soft);border-color:var(--rose)}
+.nav a:hover{border-color:var(--rose);color:var(--rose-deep)}
 
 /* --- hero --- */
 header{padding:44px 0 8px}
@@ -44,8 +47,8 @@ h1 em{font-style:normal;color:var(--rose)}
 .lead{font-size:clamp(17px,4.4vw,20px);color:var(--ink2);margin:0 0 22px;max-width:760px}
 .crit{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
 .crit span{font-family:'IBM Plex Mono',monospace;font-size:13px;background:#fff;border:1px solid var(--line);
-  border-radius:999px;padding:8px 13px;color:var(--ink2)}
-.crit span b{color:var(--ink)}
+  border-radius:999px;padding:8px 13px;color:var(--ink2);white-space:nowrap}
+.crit span b{color:var(--ink);font-weight:600}
 
 /* --- sections --- */
 section{margin-top:56px;scroll-margin-top:64px}
@@ -128,11 +131,12 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);
 
 <div class="bar">
   <div class="bar-in">
-    <div class="brand">Hulajnoga <span>dla Ani</span></div>
+    <div class="brand">🛴 <b>hulajnogadlaani</b></div>
+    <span class="navlab">Skocz do</span>
     <nav class="nav">
-      <a href="#wybor">Szybki wybór</a>
+      <a href="#wybor">Wybór</a>
       <a href="#do22">Do 22 kg</a>
-      <a href="#teren">Prawdziwy teren</a>
+      <a href="#teren">Teren</a>
       <a href="#odpada">Odpada</a>
       <a href="#przepisy">Zanim kupisz</a>
       <a href="#dane">Skąd dane</a>
@@ -146,18 +150,17 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);
     <h1>Hulajnoga <em>dla Ani</em></h1>
     <p class="lead">Przeczesane 69 modeli z polskich sklepów. Poniżej te, które naprawdę spełniają kryteria: jazda także poza asfaltem, duże koła, amortyzacja i składana konstrukcja.</p>
     <div class="crit">
-      <span><b>do 3 000 zł</b></span>
-      <span>koła <b>10&quot; i więcej</b></span>
+      <span>cena <b>do 3 000 zł</b></span>
+      <span>koła <b>10 cali i więcej</b></span>
       <span><b>amortyzacja</b> przód i tył</span>
       <span><b>składana</b></span>
       <span>waga <b>do 22 kg</b></span>
     </div>
-    <p class="lead" style="font-size:16px;margin-bottom:0">Waga nie jest tu przypadkiem: to ona decyduje, czy hulajnogę wniesiesz po schodach i zmieścisz w bagażniku. Dlatego lista jest ułożona od najlżejszych, a przy każdym modelu jest napisane, do czego realnie wystarczy.</p>
   </header>
 
   <section id="wybor">
     <h2><span class="num">WYBÓR NA SKRÓTY</span>Trzy, które warto rozważyć</h2>
-    <p class="sub">Jeżeli nie chcesz czytać całości — te trzy pokrywają wszystkie scenariusze.</p>
+    <p class="sub">Te trzy pokrywają wszystkie scenariusze. Waga decyduje o tym, czy hulajnogę wniesiesz po schodach i zmieścisz w bagażniku — dlatego przy każdym modelu piszę, do czego realnie wystarczy.</p>
     <div class="picks">
       <div class="pick">
         <div class="em">🥇</div>
@@ -198,7 +201,7 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);
           <div class="price">2 559 zł</div>
           <div class="specs">
             <i><b>19,3 kg</b></i>
-            <i>koła <b>10&quot;</b> bezdętkowe</i>
+            <i>koła <b>10 cali</b> bezdętkowe</i>
             <i>silnik <b>500 W</b> (1 200 W)</i>
             <i class="hi">przód + tył</i>
             <i class="hi">tarcza + tarcza</i>
@@ -218,7 +221,7 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);
           <div class="price">1 999 zł</div>
           <div class="specs">
             <i><b>19 kg</b></i>
-            <i>koła <b>10&quot;</b> dętkowe</i>
+            <i>koła <b>10 cali</b> dętkowe</i>
             <i>silnik <b>600 W</b> (800 W)</i>
             <i class="hi">przód + tył</i>
             <i class="warn">tarcza tył + bęben przód</i>
@@ -237,7 +240,7 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);
           <div class="price">2 299 zł</div>
           <div class="specs">
             <i><b>21 kg</b></i>
-            <i>koła <b>10&quot;</b> dętkowe</i>
+            <i>koła <b>10 cali</b> dętkowe</i>
             <i>silnik <b>800 W</b></i>
             <i class="hi">przód + tył + sprężyny</i>
             <i>tarcza tył + bęben przód</i>
@@ -256,7 +259,7 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);
           <div class="price">1 599 zł</div>
           <div class="specs">
             <i><b>19 kg</b></i>
-            <i>koła <b>10&quot;</b></i>
+            <i>koła <b>10 cali</b></i>
             <i>silnik 400 W</i>
             <i class="hi">przód + tył</i>
             <i class="warn">hamulec bębnowy</i>
@@ -274,7 +277,7 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);
           <div class="price">1 604 zł</div>
           <div class="specs">
             <i><b>21 kg</b></i>
-            <i>koła <b>10&quot;</b></i>
+            <i>koła <b>10 cali</b></i>
             <i>silnik 500 W</i>
             <i class="hi">przód + tył</i>
             <i class="hi">hamulec tarczowy</i>
@@ -293,7 +296,7 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);
           <div class="price">1 893 zł</div>
           <div class="specs">
             <i><b>22 kg</b></i>
-            <i>koła <b>10&quot;</b></i>
+            <i>koła <b>10 cali</b></i>
             <i>silnik 500 W</i>
             <i class="hi">przód + tył</i>
             <i class="hi">hamulec tarczowy</i>
@@ -311,7 +314,7 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);
           <div class="price">1 425 zł</div>
           <div class="specs">
             <i><b>20,1 kg</b></i>
-            <i>koła <b>10&quot;</b> bezdętkowe</i>
+            <i>koła <b>10 cali</b> bezdętkowe</i>
             <i>silnik 350 W (700 W)</i>
             <i class="warn">tylko przód</i>
             <i>hamulec bęben + E-ABS</i>
@@ -329,7 +332,7 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);
           <div class="price">2 040 zł</div>
           <div class="specs">
             <i><b>19 kg</b></i>
-            <i>koła <b>10&quot;</b></i>
+            <i>koła <b>10 cali</b></i>
             <i>silnik 500 W</i>
             <i class="hi">przód + tył</i>
             <i class="hi">hamulec tarczowy</i>
@@ -355,7 +358,7 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);
           <div class="price">2 199 zł</div>
           <div class="specs">
             <i class="warn"><b>26 kg</b></i>
-            <i>koła <b>10&quot;</b> pneumatyczne</i>
+            <i>koła <b>10 cali</b> pneumatyczne</i>
             <i>silnik <b>1 000 W</b></i>
             <i class="hi">przód + tył</i>
             <i class="hi">tarcza + tarcza</i>
@@ -373,7 +376,7 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);
           <div class="price">2 399 zł</div>
           <div class="specs">
             <i class="warn"><b>25,4 kg</b></i>
-            <i>koła <b>10&quot;</b> bezdętkowe</i>
+            <i>koła <b>10 cali</b> bezdętkowe</i>
             <i>silnik <b>1 000 W</b> (1 400 W)</i>
             <i class="hi">przód + tył</i>
             <i class="hi">tarcza + tarcza</i>
@@ -391,7 +394,7 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);
           <div class="price">2 849 zł</div>
           <div class="specs">
             <i class="warn"><b>26,2 kg</b></i>
-            <i>koła <b>10&quot;</b></i>
+            <i>koła <b>10 cali</b></i>
             <i>silnik <b>1 000 W</b> (1 400 W)</i>
             <i class="hi">przód + tył</i>
             <i class="hi">tarcza + tarcza</i>
@@ -409,7 +412,7 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);
           <div class="price">2 099 zł</div>
           <div class="specs">
             <i class="warn"><b>26 kg</b></i>
-            <i>koła <b>10&quot;</b> terenowe próżniowe</i>
+            <i>koła <b>10 cali</b> terenowe próżniowe</i>
             <i>silnik 800 W</i>
             <i class="hi">4-ramienny amortyzator</i>
             <i class="hi">tarcza + tarcza</i>
@@ -427,7 +430,7 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);
           <div class="price">1 999 zł</div>
           <div class="specs">
             <i class="warn"><b>25 kg</b></i>
-            <i>koła <b>10&quot;</b> bezdętkowe</i>
+            <i>koła <b>10 cali</b> bezdętkowe</i>
             <i>silnik 800 W</i>
             <i class="hi">przód + tył</i>
             <i class="hi">tarcza + tarcza</i>
@@ -445,7 +448,7 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);
           <div class="price">1 949 zł</div>
           <div class="specs">
             <i class="warn"><b>23 kg</b></i>
-            <i>koła <b>10&quot;</b> bezdętkowe</i>
+            <i>koła <b>10 cali</b> bezdętkowe</i>
             <i>silnik 250 W (1 000 W)</i>
             <i class="hi">przód + tył + sprężyny</i>
             <i>75 km</i>
@@ -460,7 +463,7 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);
 
     <div class="note dark">
       <h3>„A czemu nie KuKirin G2 Pro?”</h3>
-      <p>Sprawdziłem u producenta i tu jest niespodzianka: <b>G2 Pro jest słabszy od zwykłego G2</b>. G2 ma silnik 800 W (2 099 zł), a G2 Pro — <b>600 W</b> za tę samą cenę. Do tego Pro ma koła <b>9 cali</b>, czyli poniżej progu 10&quot;, waży 27 kg i jest sprzedawany z fotelikiem, czyli jako wygodna hulajnoga miejska — z siedzeniem.</p>
+      <p>Sprawdziłem u producenta i tu jest niespodzianka: <b>G2 Pro jest słabszy od zwykłego G2</b>. G2 ma silnik 800 W (2 099 zł), a G2 Pro — <b>600 W</b> za tę samą cenę. Do tego Pro ma koła <b>9 cali</b>, czyli poniżej progu 10 cali, waży 27 kg i jest sprzedawany z fotelikiem, czyli jako wygodna hulajnoga miejska — z siedzeniem.</p>
       <p style="margin-bottom:0">Więc: G2 Pro odpada nie na wadze, tylko na tym, że jest <b>wolniejszy i mniejszy na kołach</b> od tańszego G2. Jeżeli już KuKirin, to albo G2 (800 W, opony terenowe), albo G2 Ultra (2×800 W, 2 659 zł, ale 31 kg).</p>
     </div>
   </section>
@@ -495,7 +498,7 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);
     <h2><span class="num">SKĄD DANE</span>Ile w tym pewności</h2>
     <p class="sub">Żeby było jasne, które liczby są twarde, a które warte sprawdzenia.</p>
     <div class="q">
-      <div class="qi"><div class="l">PRZESIEW</div><p style="margin:0">69 modeli z polskich sklepów spełniało kryteria koła 10&quot;+ i składana konstrukcja. Z tego 9 mieści się w 22 kg, a 6 w przedziale 23–26 kg.</p></div>
+      <div class="qi"><div class="l">PRZESIEW</div><p style="margin:0">69 modeli z polskich sklepów spełniało kryteria koła 10 cali i więcej oraz składana konstrukcja. Z tego 9 mieści się w 22 kg, a 6 w przedziale 23–26 kg.</p></div>
       <div class="qi"><div class="l">🟢 TWARDE</div><p style="margin:0">Waga, silnik, koła, hamulce i amortyzacja sprawdzone u producentów i w danych technicznych sklepów dla: Segway F3 Pro D, Motus Daytona 10 i Scooty 10 Max, Kamikaze K1 / K1 Plus / K1 Lite, Navee GT3 Max, KuKirin G2 i G2 Pro, Xiaomi 5.</p></div>
       <div class="qi"><div class="l">🟡 DO SPRAWDZENIA</div><p style="margin:0">Dwie rozbieżności w danych, które znalazłem: Kamikaze K1 Lite — 25 kg (sklep) vs 27 kg (porównywarka) oraz KuKirin G2 — 26 kg (producent) vs 22 kg (porównywarka). W obu przypadkach podaję wersję producenta.</p></div>
       <div class="qi"><div class="l">⚪ CZEGO NIE WIEM</div><p style="margin:0">Szerokość opony i skok zawieszenia nie są publikowane nigdzie. A to dwa parametry, które w cięższym terenie decydują najbardziej.</p></div>
@@ -506,7 +509,7 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);
   <footer>
     Hulajnoga dla Ani · przygotowane 12.09.2026<br>
     Źródła: dane techniczne producentów (Segway, Motus, KuKirin, Kamikaze, Navee, Xiaomi, Sencor) oraz porównywarka cenowa Ceneo.pl.<br>
-    Zakres: koła 10&quot; i więcej · amortyzacja przód i tył · składana · do 3 000 zł
+    Zakres: koła 10 cali i więcej · amortyzacja przód i tył · składana · do 3 000 zł
   </footer>
 </div>
 </body>
