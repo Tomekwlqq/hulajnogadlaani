@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Randki · Poznań</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF6EF; --karta:#fff; --ink:#2A2230; --mut:#7A6F73; --linia:#EADFD3;
+  --wknd:#F5ECE1; --akcent:#C2552B; --r:14px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,sans-serif;overflow-x:hidden}
+.wrap{max-width:1180px;margin:0 auto;padding:20px 16px 64px}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:700;letter-spacing:-.01em;margin:0}
+h1{font-size:30px}
+h2{font-size:21px;margin:34px 0 12px}
+a{color:inherit}
+svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* nagłówek */
+.top{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:flex-end;justify-content:space-between}
+.top p{margin:4px 0 0;color:var(--mut)}
+.staty{display:flex;gap:8px;flex-wrap:wrap}
+.stat{background:var(--karta);border:1px solid var(--linia);border-radius:999px;padding:4px 12px;font-size:13px;color:var(--mut)}
+.stat b{color:var(--ink)}
+.stat.dodaj{background:var(--ink);color:#fff;border-color:var(--ink);text-decoration:none;font-weight:600}
+
+/* legenda */
+.legenda{display:flex;flex-wrap:wrap;gap:10px 22px;margin:18px 0 6px;padding:12px 14px;background:var(--karta);border:1px solid var(--linia);border-radius:var(--r)}
+.lg-rodz{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.lg-rodz>b{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);margin-right:2px}
+.lg{display:inline-flex;align-items:center;gap:5px;font-size:13px;color:var(--c);background:color-mix(in srgb,var(--c) 10%,#fff);border-radius:999px;padding:3px 9px 3px 7px}
+.legenda .klucz{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--mut);width:100%;border-top:1px dashed var(--linia);padding-top:8px}
+.legenda .klucz span{display:inline-flex;align-items:center;gap:6px}
+.sw{display:inline-block;width:14px;height:14px;border-radius:4px;background:var(--wknd);border:1px solid var(--linia)}
+.sw.eks{background:#fff;border:1.5px dashed var(--ink)}
+.sw.zak{background:#fff;border:1.5px dashed var(--akcent)}
+
+.legenda-w summary{cursor:pointer;font-size:13px;color:var(--mut);margin-top:16px}
+.legenda-w[open] summary{margin-bottom:-8px}
+/* na dziś */
+.na-dzis{margin-top:20px}
+.na-dzis h2{margin-top:0}
+.na-dzis h2 small{font-family:Inter;font-weight:500;font-size:13px;color:var(--mut)}
+.dz-lista{display:grid;gap:12px}
+@media (min-width:720px){ .dz-lista{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (min-width:1100px){ .dz-lista{grid-template-columns:repeat(3,minmax(0,1fr))} }
+.dz-karta{background:var(--karta);border:1px solid var(--linia);border-radius:var(--r);padding:14px 16px}
+.dz-gora{display:flex;align-items:center;gap:8px}
+.dz-ik{display:inline-flex;width:30px;height:30px;border-radius:9px;background:var(--c);color:#fff;align-items:center;justify-content:center}
+.dz-godz{font-weight:600;font-size:15px}
+.dz-karta h3{font-size:17px;margin-top:8px;line-height:1.3}
+.zajawka{margin:8px 0 0;font-size:14px;background:#FFF8EC;border-radius:10px;padding:8px 10px}
+/* pasek „kiedy chcesz” */
+.pasek{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:14px}
+.pasek>span{font-size:13px;color:var(--mut)}
+
+/* chip */
+.chip{display:flex;align-items:center;gap:5px;text-decoration:none;color:var(--c);
+  background:color-mix(in srgb,var(--c) 13%,#fff);
+  border-radius:7px;padding:3px 6px;font-size:12px;line-height:1.25;margin-top:4px;min-width:0}
+.chip b{font-weight:600}
+.chip .t{color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip.eks{outline:1.5px dashed var(--c);outline-offset:1px}
+.chip.minelo{filter:grayscale(1);opacity:.5}
+.pasek .chip{margin:0;padding:5px 10px;font-size:13px}
+.zakup{display:block;text-decoration:none;font-size:11px;color:var(--akcent);border:1.5px dashed var(--akcent);border-radius:7px;padding:1px 5px;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* kalendarz */
+.kal{display:grid;gap:22px}
+.mies h3{font-size:19px;margin-bottom:8px;text-transform:capitalize}
+.mies h3 small{font-family:Inter;font-weight:400;font-size:13px;color:var(--mut)}
+.siatka{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.dn{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);text-align:center;padding-bottom:2px}
+.dz{background:var(--karta);border:1px solid var(--linia);border-radius:9px;min-height:58px;padding:4px;min-width:0}
+.dz.wknd{background:var(--wknd)}
+.dz.obcy{background:transparent;border-color:transparent}
+.dz.przeszly .num{color:#bdb3ad}
+.dz.dzis{border:2px solid var(--ink)}
+.dz.dzis .num::after{content:" dziś";font-size:10px;font-weight:600}
+.num{font-size:12px;font-weight:600;color:var(--mut)}
+
+/* mobile: w komórce tylko ikona */
+@media (max-width:719px){
+  .dz .chip{padding:3px;justify-content:center;border-radius:6px}
+  .dz .chip b,.dz .chip .t{display:none}
+  .dz .zakup{font-size:0;height:6px;padding:0;border-width:0;background:var(--akcent);border-radius:3px}
+}
+@media (min-width:720px){
+  .dz{min-height:100px;padding:6px}
+  .kal{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (min-width:720px) and (max-width:1023px){ .kal{grid-template-columns:1fr} }
+
+/* karty */
+.karty{display:grid;gap:14px}
+@media (min-width:900px){ .karty{grid-template-columns:repeat(2,minmax(0,1fr))} }
+.karta{background:var(--karta);border:1px solid var(--linia);border-radius:var(--r);padding:16px;scroll-margin-top:16px;transition:box-shadow .3s}
+.karta.minelo{opacity:.6}
+.karta.flash{box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 45%,transparent)}
+.k-gora{display:flex;gap:12px;align-items:flex-start}
+.nr{display:flex;flex-direction:column;align-items:center;gap:2px;flex:none;width:46px;padding:7px 0 5px;border-radius:12px;background:var(--c);color:#fff}
+.nr svg{width:22px;height:22px}
+.nr b{font-size:12px}
+.k-tyt h3{font-size:18px;line-height:1.25}
+.kiedy{margin:3px 0 0;color:var(--mut);font-size:13.5px}
+.badges{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:12px 0 4px}
+.b{font-size:12px;border-radius:999px;padding:2px 9px;background:#F1EAE2}
+.b.typ{background:color-mix(in srgb,var(--c) 13%,#fff);color:var(--c);font-weight:600}
+.b.weekend{background:var(--wknd)}
+.b.eks{background:#fff;border:1.5px dashed var(--ink)}
+.b.szary{background:#e9e6e4;color:#777}
+.powaga{display:inline-flex;align-items:center;gap:3px;font-size:12px;color:var(--mut);margin-left:2px}
+.powaga i{width:8px;height:8px;border-radius:50%;border:1.5px solid var(--ink);display:inline-block}
+.powaga i.on{background:var(--ink)}
+.powaga em{font-style:normal;margin-left:4px}
+.opis{margin:8px 0 0}
+.uwaga{margin:8px 0 0;font-size:13.5px;color:var(--mut);font-style:italic}
+.kup{margin:10px 0 0;font-size:13.5px;font-weight:600;color:var(--akcent)}
+.kup.minal{color:#9a3412}
+.plan{margin-top:12px;border-top:1px dashed var(--linia);padding-top:8px}
+.plan summary{cursor:pointer;font-weight:600;color:var(--c)}
+.plan h4{font-family:Fraunces,serif;font-size:15px;margin:14px 0 4px}
+.plan p{margin:6px 0}
+.plan-t{width:100%;border-collapse:collapse;font-size:13.5px;margin:6px 0}
+.plan-t th{text-align:left;font-weight:600;color:var(--mut);border-bottom:1px solid var(--linia);padding:4px 6px}
+.plan-t td{border-bottom:1px solid var(--linia);padding:6px;vertical-align:top}
+@media (max-width:640px){
+  .plan-t thead{display:none}
+  .plan-t tr{display:block;border-bottom:1px solid var(--linia);padding:6px 0}
+  .plan-t td{display:block;border:0;padding:1px 0}
+  .plan-t td:first-child{font-weight:600}
+}
+.linki{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.btn,.akcje button{font:inherit;font-size:13.5px;border-radius:9px;padding:7px 12px;border:1px solid var(--linia);background:#fff;color:var(--ink);text-decoration:none;cursor:pointer}
+.btn:hover,.akcje button:hover{border-color:var(--c)}
+.akcje{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;margin-top:14px;padding-top:12px;border-top:1px dashed var(--linia)}
+.akcje .wybierz{background:var(--c);color:#fff;border-color:var(--c);font-weight:600}
+.oceny-box{flex:1 1 220px}
+.mala{margin:0 0 4px;font-size:12px;color:var(--mut)}
+.ocena{display:flex;align-items:center;gap:4px;margin:3px 0}
+.ocena span{width:84px;font-size:12.5px;color:var(--mut)}
+.akcje .ocena button{padding:3px 0;width:30px;text-align:center}
+.akcje .ocena button.on{background:var(--c);color:#fff;border-color:var(--c)}
+.akcje .kopiuj{margin-top:6px}
+.akcje .kopiuj:disabled{opacity:.4;cursor:default}
+
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%) translateY(120px);background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;font-size:14px;transition:transform .25s;max-width:calc(100% - 32px)}
+.toast.on{transform:translateX(-50%) translateY(0)}
+/* notatnik */
+.notatnik{display:grid;gap:14px;margin-top:34px;scroll-margin-top:12px}
+@media (min-width:900px){ .notatnik{grid-template-columns:1fr 1fr} }
+.nb-kol{background:var(--karta);border:1px solid var(--linia);border-radius:var(--r);padding:14px 16px}
+.nb-kol h2{margin:0 0 2px;font-size:19px}
+.nb-kol h2 small{font-family:Inter;font-weight:500;font-size:13px;color:var(--mut)}
+.nb-form textarea,.nb-form select,.nb-form input{font:inherit;font-size:16px;width:100%;border:1px solid var(--linia);border-radius:10px;padding:9px 10px;background:#fff;color:var(--ink)}
+.nb-form textarea{resize:vertical}
+.nb-row{display:flex;gap:8px;margin-top:8px}
+.nb-row select,.nb-row input{flex:1;min-width:0}
+.nb-row button{font:inherit;font-weight:600;border:0;border-radius:10px;padding:9px 16px;background:var(--ink);color:#fff;cursor:pointer;flex:none}
+.nb-form.off textarea,.nb-form.off button{opacity:.45;pointer-events:none}
+.nb-info{font-size:12.5px;color:var(--akcent);margin:6px 0 0}
+.wpisy{list-style:none;margin:12px 0 0;padding:0}
+.wpisy li{border-top:1px solid var(--linia);padding:8px 0;font-size:14px}
+.wpisy .kto{display:block;font-size:11.5px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.05em}
+.wpisy small{display:block;color:#b0a6a0;font-size:11.5px}
+.pusto{font-size:13.5px;color:var(--mut);margin:10px 0 0}
+.chip.brief{background:#EDE8EF}
+footer{margin-top:40px;color:var(--mut);font-size:12.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Randki · Poznań</h1>
+      <p>Wydarzenia z oficjalnych źródeł, każde z planem wokół. Dwie na tydzień: weekend i dzień roboczy.</p>
+    </div>
+    <div class="staty">
+      <span class="stat">dziś <b>czwartek 29 paź.</b></span>
+      <span class="stat">aktualne <b>10</b> z 10</span>
+      <span class="stat">paczka <b>2026-W44</b></span>
+      
+    </div>
+  </header>
+
+  <section class="na-dzis"><h2>Na dziś <small>czwartek 29 paź.</small></h2><div class="dz-lista"><article class="dz-karta" style="--c:#3B5BDB">
+  <div class="dz-gora"><span class="dz-ik"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg></span><span class="dz-godz">20:00</span><span class="b typ">koncert</span></div>
+  <h3>1. Witkacy. Kompozycje Astronomiczne: Mazolewski i Dorociński</h3>
+  <p class="kiedy">Teatr Wielki, Scena Duża (ul. Fredry 9)</p>
+  <p class="opis">Wojtek Mazolewski Quintet gra jazz, a Marcin Dorociński czyta Witkacego. Poezja z jazzem na dużej scenie, jeden wieczór w Poznaniu.</p>
+  <p class="zajawka">💡 Najmocniejsza opcja na dziś. O 17:00 Beksiński na Targach (10 min pieszo od teatru), potem szybka kolacja i Witkacy. Dwóch wizjonerów w jeden wieczór.</p>
+  <div class="linki"><a class="btn" href="https://www.opera.poznan.pl/mazolewskidorocinski" target="_blank" rel="noopener">Szczegóły i bilety</a></div>
+</article><article class="dz-karta" style="--c:#C2552B">
+  <div class="dz-gora"><span class="dz-ik"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="m3 16 5-5 4 4 3-3 6 6"/><circle cx="15.5" cy="8.5" r="1.5"/></svg></span><span class="dz-godz">wejścia co 30 min, ostatnie 18:00</span><span class="b typ">wystawa</span></div>
+  <h3>2. Beksiński w Poznaniu</h3>
+  <p class="kiedy">MTP, Hala 1A (brama 10, ul. Głogowska 18)</p>
+  <p class="opis">Ok. 120 obrazów, fotografii i rysunków Beksińskiego na ponad 1000 m², z darmowym audioprzewodnikiem.</p>
+  <p class="zajawka">💡 Klimat idealny na koniec października. Po wystawie grzane wino albo kolacja w centrum i rozmowa, który obraz każde z was by powiesiło w domu.</p>
+  <div class="linki"><a class="btn" href="https://www.ebilet.pl/biznes/wystawa/beksinski-w-poznaniu" target="_blank" rel="noopener">Szczegóły i bilety</a></div>
+</article><article class="dz-karta" style="--c:#5C5F66">
+  <div class="dz-gora"><span class="dz-ik"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/></svg></span><span class="dz-godz">18:30</span><span class="b typ">inne</span></div>
+  <h3>3. Dopaść Cartera (1971), British Film Festival</h3>
+  <p class="kiedy">Kino Muza, Sala 1 (ul. Św. Marcin 30)</p>
+  <p class="opis">Klasyk brytyjskiego kina gangsterskiego z Michaelem Caine’em w kameralnym, najstarszym kinie Poznania. Bilety w cyklu 16–22 zł.</p>
+  <p class="zajawka">💡 Po seansie piwo albo wino w okolicy Św. Marcina i spór, czy Carter był bohaterem.</p>
+  <div class="linki"><a class="btn" href="https://www.kinomuza.pl/event/dopasc-cartera/" target="_blank" rel="noopener">Szczegóły i bilety</a></div>
+</article><article class="dz-karta" style="--c:#C2552B">
+  <div class="dz-gora"><span class="dz-ik"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="m3 16 5-5 4 4 3-3 6 6"/><circle cx="15.5" cy="8.5" r="1.5"/></svg></span><span class="dz-godz">do 19:00</span><span class="b typ">wystawa</span></div>
+  <h3>4. „Stupor” Zbigniewa Rogalskiego, ostatnie dni</h3>
+  <p class="kiedy">Galeria Miejska Arsenał, Stary Rynek 6</p>
+  <p class="opis">Wystawa czynna tylko do 31.10, wstęp wolny. Krótka, ale dobra na rozgrzewkę.</p>
+  <p class="zajawka">💡 Arsenał przed 19:00, potem kolacja na Starym Rynku. Najmniej planowania ze wszystkich opcji.</p>
+  <div class="linki"><a class="btn" href="https://arsenal.art.pl/" target="_blank" rel="noopener">Szczegóły i bilety</a></div>
+</article><article class="dz-karta" style="--c:#C2552B">
+  <div class="dz-gora"><span class="dz-ik"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="m3 16 5-5 4 4 3-3 6 6"/><circle cx="15.5" cy="8.5" r="1.5"/></svg></span><span class="dz-godz">do 19:00</span><span class="b typ">wystawa</span></div>
+  <h3>5. „Świat jak zielnik”: natura w sztuce od XVII do XXI wieku</h3>
+  <p class="kiedy">CK Zamek, ul. Św. Marcin 80/82</p>
+  <p class="opis">Przyroda w sztuce od baroku po współczesność, bilet 30 zł.</p>
+  <p class="zajawka">💡 Spokojny wieczór: wystawa, potem herbata albo wino w kawiarni w Zamku, a jeśli zostanie energia, seans w Muzie po sąsiedzku.</p>
+  <div class="linki"><a class="btn" href="http://ckzamek.pl/wydarzenia/14832-swiat-jak-zielnik-natura-w-sztuce-od-xvii-do-xxi-w/" target="_blank" rel="noopener">Szczegóły i bilety</a></div>
+</article></div></section>
+
+  <details class="legenda-w" open>
+  <summary>Legenda: kolory i znaczki</summary>
+  <div class="legenda">
+    <div class="lg-rodz"><b>muzyka</b><span class="lg" style="--c:#3B5BDB"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>koncert</span><span class="lg" style="--c:#7048B6"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h18v3H3z"/><path d="M5 6c0 6 2 11 4 15M19 6c0 6-2 11-4 15"/><path d="M9 21h6"/></svg>opera</span></div><div class="lg-rodz"><b>sztuka</b><span class="lg" style="--c:#C2552B"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="m3 16 5-5 4 4 3-3 6 6"/><circle cx="15.5" cy="8.5" r="1.5"/></svg>wystawa</span><span class="lg" style="--c:#9C6B10"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9 12 4l9 5"/><path d="M5 9v9M9.5 9v9M14.5 9v9M19 9v9"/><path d="M3 21h18"/></svg>muzeum</span></div><div class="lg-rodz"><b>ruch</b><span class="lg" style="--c:#D6336C"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="13" cy="4" r="2"/><path d="M13 6v6l-4 4M13 12l4 3v6M9 9l4-1 4 2"/></svg>taniec</span><span class="lg" style="--c:#AE3EC9"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/></svg>warsztat</span></div><div class="lg-rodz"><b>zabawa</b><span class="lg" style="--c:#2B8A3E"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l3 3M15 8l2 2"/></svg>escape room</span><span class="lg" style="--c:#0C8599"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5c7 4 13 4 20 0"/><path d="m5 7 1.5 5L8 8M11 8.5l1 5 1-5M16 8l1.5 4L19 7"/></svg>festiwal</span></div>
+    <div class="klucz">
+      <span><i class="sw"></i>weekend</span>
+      <span><i class="sw eks"></i>eksperyment spoza profilu</span>
+      <span><i class="sw zak"></i>ostatni dzień na bilety</span>
+      <span class="powaga"><i class="on"></i><i></i><i></i> powaga: na luzie · pół na pół · na serio</span>
+    </div>
+  </div>
+  </details>
+
+  <div class="pasek"><span>W dowolny dzień:</span><a class="chip tydzien trwa" style="--c:#C2552B" href="#R6" data-r="6" title="wystawa"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="m3 16 5-5 4 4 3-3 6 6"/><circle cx="15.5" cy="8.5" r="1.5"/></svg><b>R6</b><span class="t">Wystawa „Świat jak zielnik” w CK Z</span></a><a class="chip tydzien dowolny" style="--c:#2B8A3E" href="#R5" data-r="5" title="escape room"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l3 3M15 8l2 2"/></svg><b>R5</b><span class="t">Escape room „Zemsta Umarlaka” </span></a></div>
+
+  <h2>Kalendarz</h2>
+  <div class="kal"><section class="mies"><h3>październik <small>2026</small></h3><div class="siatka"><div class="dn">pn</div><div class="dn">wt</div><div class="dn">śr</div><div class="dn">cz</div><div class="dn">pt</div><div class="dn wknd">sb</div><div class="dn wknd">nd</div><div class="dz przeszly"><span class="num">26</span></div><div class="dz przeszly"><span class="num">27</span></div><div class="dz przeszly"><span class="num">28</span></div><div class="dz dzis"><span class="num">29</span></div><div class="dz"><span class="num">30</span><a class="zakup" href="#R4" data-r="4"><span class="t">bilety R4</span></a></div><div class="dz wknd"><span class="num">31</span></div><div class="dz obcy wknd"><span class="num"></span></div></div></section>
+<section class="mies"><h3>listopad <small>2026</small></h3><div class="siatka"><div class="dn">pn</div><div class="dn">wt</div><div class="dn">śr</div><div class="dn">cz</div><div class="dn">pt</div><div class="dn wknd">sb</div><div class="dn wknd">nd</div><div class="dz obcy przeszly"><span class="num"></span></div><div class="dz obcy przeszly"><span class="num"></span></div><div class="dz obcy przeszly"><span class="num"></span></div><div class="dz obcy"><span class="num"></span></div><div class="dz obcy"><span class="num"></span></div><div class="dz obcy wknd"><span class="num"></span></div><div class="dz wknd"><span class="num">1</span></div><div class="dz"><span class="num">2</span></div><div class="dz"><span class="num">3</span></div><div class="dz"><span class="num">4</span></div><div class="dz"><span class="num">5</span></div><div class="dz"><span class="num">6</span></div><div class="dz wknd"><span class="num">7</span><a class="zakup" href="#R8" data-r="8"><span class="t">bilety R8</span></a></div><div class="dz wknd"><span class="num">8</span><a class="zakup" href="#R14" data-r="14"><span class="t">bilety R14</span></a></div><div class="dz"><span class="num">9</span></div><div class="dz"><span class="num">10</span><a class="zakup" href="#R9" data-r="9"><span class="t">bilety R9</span></a></div><div class="dz"><span class="num">11</span></div><div class="dz"><span class="num">12</span><a class="zakup" href="#R10" data-r="10"><span class="t">bilety R10</span></a></div><div class="dz"><span class="num">13</span><a class="chip tydzien przed" style="--c:#3B5BDB" href="#R4" data-r="4" title="koncert"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg><b>R4</b><span class="t">Święta Góra w Gostyniu + koncert j</span></a></div><div class="dz wknd"><span class="num">14</span><a class="chip weekend przed" style="--c:#D6336C" href="#R8" data-r="8" title="taniec"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="13" cy="4" r="2"/><path d="M13 6v6l-4 4M13 12l4 3v6M9 9l4-1 4 2"/></svg><b>R8</b><span class="t">Balet na rozgrzewkę, potem jarmark</span></a><a class="zakup" href="#R11" data-r="11"><span class="t">bilety R11</span></a></div><div class="dz wknd"><span class="num">15</span></div><div class="dz"><span class="num">16</span></div><div class="dz"><span class="num">17</span></div><div class="dz"><span class="num">18</span><a class="chip tydzien przed eks" style="--c:#3B5BDB" href="#R14" data-r="14" title="koncert"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg><b>R14</b><span class="t">Eagle-Eye Cherry w Tamie</span></a><a class="zakup" href="#R12" data-r="12"><span class="t">bilety R12</span></a></div><div class="dz"><span class="num">19</span><a class="chip tydzien przed" style="--c:#AE3EC9" href="#R9" data-r="9" title="warsztat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/></svg><b>R9</b><span class="t">Kolaż w Arsenale, potem jazz w Blu</span></a></div><div class="dz"><span class="num">20</span></div><div class="dz wknd"><span class="num">21</span></div><div class="dz wknd"><span class="num">22</span><a class="chip weekend przed" style="--c:#3B5BDB" href="#R10" data-r="10" title="koncert"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg><b>R10</b><span class="t">Dębicz</span></a><a class="zakup" href="#R13" data-r="13"><span class="t">bilety R13</span></a></div><div class="dz"><span class="num">23</span></div><div class="dz"><span class="num">24</span><a class="chip tydzien przed" style="--c:#3B5BDB" href="#R11" data-r="11" title="koncert"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg><b>R11</b><span class="t">Nils Petter Molvær</span></a></div><div class="dz"><span class="num">25</span></div><div class="dz"><span class="num">26</span></div><div class="dz"><span class="num">27</span></div><div class="dz wknd"><span class="num">28</span><a class="chip weekend przed" style="--c:#3B5BDB" href="#R12" data-r="12" title="koncert"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg><b>R12</b><span class="t">Gerald Clayton Trio w Blue Note</span></a></div><div class="dz wknd"><span class="num">29</span></div><div class="dz"><span class="num">30</span></div><div class="dz obcy"><span class="num"></span></div><div class="dz obcy"><span class="num"></span></div><div class="dz obcy"><span class="num"></span></div><div class="dz obcy"><span class="num"></span></div><div class="dz obcy wknd"><span class="num"></span></div><div class="dz obcy wknd"><span class="num"></span></div></div></section>
+<section class="mies"><h3>grudzień <small>2026</small></h3><div class="siatka"><div class="dn">pn</div><div class="dn">wt</div><div class="dn">śr</div><div class="dn">cz</div><div class="dn">pt</div><div class="dn wknd">sb</div><div class="dn wknd">nd</div><div class="dz obcy"><span class="num"></span></div><div class="dz"><span class="num">1</span></div><div class="dz"><span class="num">2</span></div><div class="dz"><span class="num">3</span></div><div class="dz"><span class="num">4</span></div><div class="dz wknd"><span class="num">5</span></div><div class="dz wknd"><span class="num">6</span><a class="chip weekend przed" style="--c:#3B5BDB" href="#R13" data-r="13" title="koncert"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg><b>R13</b><span class="t">Mikołajki przy świecach</span></a></div><div class="dz"><span class="num">7</span></div><div class="dz"><span class="num">8</span></div><div class="dz"><span class="num">9</span></div><div class="dz"><span class="num">10</span></div><div class="dz"><span class="num">11</span></div><div class="dz wknd"><span class="num">12</span></div><div class="dz wknd"><span class="num">13</span></div><div class="dz"><span class="num">14</span></div><div class="dz"><span class="num">15</span></div><div class="dz"><span class="num">16</span></div><div class="dz"><span class="num">17</span></div><div class="dz"><span class="num">18</span></div><div class="dz wknd"><span class="num">19</span></div><div class="dz wknd"><span class="num">20</span></div><div class="dz"><span class="num">21</span></div><div class="dz"><span class="num">22</span></div><div class="dz"><span class="num">23</span></div><div class="dz"><span class="num">24</span></div><div class="dz"><span class="num">25</span></div><div class="dz wknd"><span class="num">26</span></div><div class="dz wknd"><span class="num">27</span></div><div class="dz"><span class="num">28</span></div><div class="dz"><span class="num">29</span></div><div class="dz"><span class="num">30</span></div><div class="dz"><span class="num">31</span></div><div class="dz obcy"><span class="num"></span></div><div class="dz obcy wknd"><span class="num"></span></div><div class="dz obcy wknd"><span class="num"></span></div></div></section></div>
+
+  <h2>Propozycje</h2>
+  <div class="karty">
+<article class="karta tydzien przed" id="R4" style="--c:#3B5BDB">
+  <div class="k-gora">
+    <span class="nr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg><b>R4</b></span>
+    <div class="k-tyt">
+      <h3>Święta Góra w Gostyniu + koncert jej muzyki wieczorem</h3>
+      <p class="kiedy">pt 13.11, 14:00–21:00 · Aula UAM</p>
+    </div>
+  </div>
+  <div class="badges"><span class="b typ">koncert</span><span class="b tydzien">w tygodniu</span><span class="powaga" title="powaga"><i class="on"></i><i class="on"></i><i class="on"></i><em>na serio</em></span></div>
+  <p class="opis">Muzyka sakralna: Zeidler (Veni Creator, Litania loretańska – rekonstrukcje) i Mozart (Missa brevis, Magnificat); Poznańskie Słowiki, organy, dyr. Maciej Wieloch.</p><p class="kup">Bilety kup do piątek 30 paź. (zostało 1 dni)</p><details class="plan"><summary>Plan z otoczką</summary><p><strong>Slot:</strong> tydzień (popołudnie + wieczór) · <strong>Czas:</strong> ok. 14:00–21:00 · <strong>Auto</strong></p>
+<h4>Oś</h4>
+<p>Po południu stoicie w barokowej bazylice, dla której Józef Zeidler pisał muzykę. Wieczorem w Poznaniu słyszycie tę muzykę na żywo — w nowej rekonstrukcji.</p>
+<table class="plan-t"><thead><tr><th>Godz.</th><th>Co</th><th>Uwagi</th></tr></thead><tbody><tr><td>14:00</td><td>Wyjazd do Gostynia (Święta Góra, Głogówko)</td><td>ok. 65 km od Poznania</td></tr><tr><td>15:00–16:15</td><td><strong>Bazylika na Świętej Górze</strong></td><td>barok Pompeo Ferrariego, jedna z największych kopuł w Polsce; zejdźcie do krypt i poszukajcie kuli armatniej w ścianie (bitwa 1761). Godziny: tel. 65 572 00 14</td></tr><tr><td>16:15</td><td>Powrót do Poznania</td><td></td></tr><tr><td>17:30–18:30</td><td><strong>Lekka kolacja</strong> w centrum, blisko Auli UAM</td><td>rezerwacja</td></tr><tr><td>19:00</td><td><strong>„Między Salzburgiem a Świętą Górą”</strong> — Filharmonia Poznańska, Aula UAM</td><td>Zeidler: <em>Veni Creator</em> i <em>Litania loretańska</em> (rekonstrukcje M. Bolewskiego) + Mozart: <em>Missa brevis</em>, <em>Magnificat</em>. Śpiewają <strong>Poznańskie Słowiki</strong>, organy, dyr. Maciej Wieloch</td></tr><tr><td>ok. 21:00</td><td><strong>Po:</strong> krótki spacer, herbata/wino</td><td></td></tr></tbody></table>
+<h4>Haczyk</h4>
+<p>W bazylice nic nie mów o wieczornym koncercie. Dopiero w Auli, przy Zeidlerze, pochyl się: „to jest muzyka z tamtego kościoła”. Kto to zgrał, ten wygrał piątek.</p>
+<h4>Bilety</h4>
+<ul><li>Koncert: <a href="https://filharmoniapoznanska.pl/en/concerts/" target="_blank" rel="noopener">link</a> (bilety24.pl)</li><li><strong>Kup do: 30.10</strong></li></ul>
+<h4>Ryzyko</h4>
+<p>Piątek po południu = trzeba urwać się z pracy ok. 13:30. Jeśli się nie da: wersja wieczorna (sam koncert + kolacja), haczyk przez 2 zdania o Zeidlerze i Świętej Górze przy stole.</p></details>
+  <div class="linki"><a class="btn" href="https://filharmoniapoznanska.pl/en/concerts/" target="_blank" rel="noopener">Strona wydarzenia</a></div>
+  <div class="akcje">
+    <button type="button" class="wybierz" data-cmd="R4">Wybieram</button>
+    <div class="oceny-box"><p class="mala">Po randce, oczami Ani:</p><div class="ocena" data-k="E"><span>Wydarzenie</span><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button><button type="button" data-v="3">3</button><button type="button" data-v="4">4</button><button type="button" data-v="5">5</button></div><div class="ocena" data-k="O"><span>Otoczka</span><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button><button type="button" data-v="3">3</button><button type="button" data-v="4">4</button><button type="button" data-v="5">5</button></div>
+      <button type="button" class="kopiuj" data-r="4" disabled>Kopiuj ocenę</button></div>
+  </div>
+</article>
+
+<article class="karta weekend przed" id="R8" style="--c:#D6336C">
+  <div class="k-gora">
+    <span class="nr"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="13" cy="4" r="2"/><path d="M13 6v6l-4 4M13 12l4 3v6M9 9l4-1 4 2"/></svg><b>R8</b></span>
+    <div class="k-tyt">
+      <h3>Balet na rozgrzewkę, potem jarmark na Targach w dniu otwarcia</h3>
+      <p class="kiedy">sob 14.11, 15:45–20:00 · Teatr Wielki, Malarnia</p>
+    </div>
+  </div>
+  <div class="badges"><span class="b typ">taniec</span><span class="b weekend">weekend</span><span class="powaga" title="powaga"><i class="on"></i><i></i><i></i><em>na luzie</em></span></div>
+  <p class="opis">60 min zajęć baletowych dla dorosłych bez doświadczenia, prowadzą tancerze Anna i Arkadiusz Gumni.</p><p class="opis">Jarmark na terenie Targów: domek Mikołaja, karuzela wenecka, koncerty, warsztaty; godzin otwarcia jeszcze nie podano.</p><p class="kup">Bilety kup do sobota 7 lis. (zostało 9 dni)</p><details class="plan"><summary>Plan z otoczką</summary><p><strong>Slot:</strong> weekend · <strong>Czas:</strong> 15:45–ok. 20:00 · <strong>Powaga:</strong> na luzie</p>
+<h4>Oś</h4>
+<p>Godzina baletu na rozgrzanie, a potem jarmark świąteczny w dniu otwarcia. Pierwszy grzaniec sezonu wypijecie razem.</p>
+<table class="plan-t"><thead><tr><th>Godz.</th><th>Co</th><th>Uwagi</th></tr></thead><tbody><tr><td>15:30</td><td>Parking przy Teatrze Wielkim (ul. Fredry 9)</td><td>auto zostaje tu na cały wieczór, Targi są ok. 1 km dalej</td></tr><tr><td>15:45–16:45</td><td><strong>Balet dla dorosłych</strong> (Malarnia)</td><td>60 min, bez doświadczenia, prowadzą tancerze Anna i Arkadiusz Gumni. 40 zł/os. Wygodny strój, skarpetki</td></tr><tr><td>17:00</td><td>Spacer na Targi</td><td>15 min pieszo, akurat zdążycie ochłonąć</td></tr><tr><td>17:15–19:30</td><td><strong>Jarmark na Targach, dzień otwarcia</strong></td><td>domek Mikołaja, karuzela wenecka, koncerty. Godziny otwarcia jeszcze nieogłoszone, sprawdzę tydzień wcześniej</td></tr><tr><td>19:30</td><td>Powrót do auta</td><td></td></tr></tbody></table>
+<h4>Haczyk</h4>
+<p>Każde z was kupuje drugiemu jedną bombkę, ale bez pokazywania przed zawieszeniem na choince. Zaczynacie w ten sposób własną serię „bombek z randek”.</p>
+<h4>Bilety</h4>
+<ul><li>Balet: <a href="https://bilety.opera.poznan.pl/nienumerowane.html?id=3633" target="_blank" rel="noopener">link</a> (40 zł)</li><li>Jarmark: wstęp bez informacji</li><li><strong>Kup do: 7.11</strong></li></ul></details>
+  <div class="linki"><a class="btn" href="https://opera.poznan.pl/pl/balet-dla-doroslych-warsztaty" target="_blank" rel="noopener">Strona wydarzenia</a><a class="btn" href="https://bilety.opera.poznan.pl/nienumerowane.html?id=3633" target="_blank" rel="noopener">Bilety</a><a class="btn" href="https://jarmark.poznan.pl/" target="_blank" rel="noopener">Strona wydarzenia</a></div>
+  <div class="akcje">
+    <button type="button" class="wybierz" data-cmd="R8">Wybieram</button>
+    <div class="oceny-box"><p class="mala">Po randce, oczami Ani:</p><div class="ocena" data-k="E"><span>Wydarzenie</span><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button><button type="button" data-v="3">3</button><button type="button" data-v="4">4</button><button type="button" data-v="5">5</button></div><div class="ocena" data-k="O"><span>Otoczka</span><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button><button type="button" data-v="3">3</button><button type="button" data-v="4">4</button><button type="button" data-v="5">5</button></div>
+      <button type="button" class="kopiuj" data-r="8" disabled>Kopiuj ocenę</button></div>
+  </div>
+</article>
+
+<article class="karta tydzien przed" id="R14" style="--c:#3B5BDB">
+  <div class="k-gora">
+    <span class="nr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg><b>R14</b></span>
+    <div class="k-tyt">
+      <h3>Eagle-Eye Cherry w Tamie</h3>
+      <p class="kiedy">śr 18.11, 20:00 · Klub Tama</p>
+    </div>
+  </div>
+  <div class="badges"><span class="b typ">koncert</span><span class="b tydzien">w tygodniu</span><span class="b eks">eksperyment</span><span class="powaga" title="powaga"><i class="on"></i><i></i><i></i><em>na luzie</em></span></div>
+  <p class="opis">Melodyjny pop-rock z soulem — ten od „Save Tonight”.</p><p class="uwaga">celowo spoza profilu: pop-rock i nostalgia za „Save Tonight”. Sprawdza, czy luz i zabawa wygrywają z klimatem</p><p class="kup">Bilety kup do niedziela 8 lis. (zostało 10 dni)</p>
+  <div class="linki"><a class="btn" href="https://www.ebilet.pl/muzyka/rock/eagle-eye-cherry" target="_blank" rel="noopener">Strona wydarzenia</a></div>
+  <div class="akcje">
+    <button type="button" class="wybierz" data-cmd="R14">Wybieram</button>
+    <div class="oceny-box"><p class="mala">Po randce, oczami Ani:</p><div class="ocena" data-k="E"><span>Wydarzenie</span><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button><button type="button" data-v="3">3</button><button type="button" data-v="4">4</button><button type="button" data-v="5">5</button></div><div class="ocena" data-k="O"><span>Otoczka</span><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button><button type="button" data-v="3">3</button><button type="button" data-v="4">4</button><button type="button" data-v="5">5</button></div>
+      <button type="button" class="kopiuj" data-r="14" disabled>Kopiuj ocenę</button></div>
+  </div>
+</article>
+
+<article class="karta tydzien przed" id="R9" style="--c:#AE3EC9">
+  <div class="k-gora">
+    <span class="nr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/></svg><b>R9</b></span>
+    <div class="k-tyt">
+      <h3>Kolaż w Arsenale, potem jazz w Blue Note</h3>
+      <p class="kiedy">czw 19.11, 18:00–22:00 · Galeria Miejska Arsenał, Stary Rynek 6</p>
+    </div>
+  </div>
+  <div class="badges"><span class="b typ">warsztat</span><span class="b tydzien">w tygodniu</span><span class="powaga" title="powaga"><i class="on"></i><i></i><i></i><em>na luzie</em></span></div>
+  <p class="opis">Analogowy kolaż (wycinanie, klejenie) o mieście jako żywym organizmie; prowadzi fotograf Mateusz Sobierajski; dla dorosłych, liczba miejsc ograniczona.</p><p class="opis">Kobieca supergrupa jazzowa: Renee Rosnes, Ingrid Jensen, Nicole Glover, Noriko Ueda, Allison Miller; klub od 19:00.</p><p class="kup">Bilety kup do wtorek 10 lis. (zostało 12 dni)</p><details class="plan"><summary>Plan z otoczką</summary><p><strong>Slot:</strong> w tygodniu · <strong>Czas:</strong> 18:00–ok. 22:00 · <strong>Powaga:</strong> na luzie</p>
+<h4>Oś</h4>
+<p>Najpierw coś robicie rękami, potem siedzicie i słuchacie. Wieczór w dwóch częściach, obie w centrum, kilkanaście minut pieszo od siebie.</p>
+<table class="plan-t"><thead><tr><th>Godz.</th><th>Co</th><th>Uwagi</th></tr></thead><tbody><tr><td>17:45</td><td>Parking w okolicy Starego Rynku</td><td></td></tr><tr><td>18:00</td><td><strong>Warsztat kolażu w Arsenale</strong> (Stary Rynek 6)</td><td>analogowy kolaż „miasto jako żywy organizm”, prowadzi fotograf Mateusz Sobierajski. Dla dorosłych, mało miejsc, długość niepodana</td></tr><tr><td>ok. 19:20</td><td>Przejście do Blue Note (ul. Kościuszki 79)</td><td>ok. 15 min pieszo, po drodze coś małego do jedzenia</td></tr><tr><td>20:00</td><td><strong>ARTEMIS</strong> w Blue Note</td><td>kobieca supergrupa jazzowa: Renee Rosnes (fortepian), Ingrid Jensen (trąbka), Nicole Glover (saksofon), Noriko Ueda, Allison Miller. Klub od 19:00</td></tr><tr><td>ok. 22:00</td><td>Powrót</td><td></td></tr></tbody></table>
+<h4>Haczyk</h4>
+<p>Każde z was robi kolaż dla drugiego, a nie dla siebie. Wymieniacie się nimi przy pierwszym drinku w Blue Note.</p>
+<h4>Bilety i zapisy</h4>
+<ul><li>Warsztat: zapis mailem na kornelia.zielinska@arsenal.art.pl, cena niepodana. Napisz wcześnie, bo miejsc jest mało</li><li>ARTEMIS: <a href="https://www.eventim.pl/noapp/event/22132480/?affiliate=GTP" target="_blank" rel="noopener">link</a> (99–169 zł)</li><li><strong>Kup i zapisz się do: 10.11</strong></li></ul>
+<h4>Ryzyko</h4>
+<p>Długość warsztatu nie jest podana. Jeśli potrwa dłużej niż do 19:30, wyjdźcie trochę przed końcem. Kolaż da się dokończyć w klubie.</p></details>
+  <div class="linki"><a class="btn" href="https://arsenal.art.pl/event/arsenal-na-luzie-27/" target="_blank" rel="noopener">Strona wydarzenia</a><a class="btn" href="https://bluenote.pl/kalendarz/artemis/" target="_blank" rel="noopener">Strona wydarzenia</a><a class="btn" href="https://www.eventim.pl/noapp/event/22132480/?affiliate=GTP" target="_blank" rel="noopener">Bilety</a></div>
+  <div class="akcje">
+    <button type="button" class="wybierz" data-cmd="R9">Wybieram</button>
+    <div class="oceny-box"><p class="mala">Po randce, oczami Ani:</p><div class="ocena" data-k="E"><span>Wydarzenie</span><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button><button type="button" data-v="3">3</button><button type="button" data-v="4">4</button><button type="button" data-v="5">5</button></div><div class="ocena" data-k="O"><span>Otoczka</span><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button><button type="button" data-v="3">3</button><button type="button" data-v="4">4</button><button type="button" data-v="5">5</button></div>
+      <button type="button" class="kopiuj" data-r="9" disabled>Kopiuj ocenę</button></div>
+  </div>
+</article>
+
+<article class="karta weekend przed" id="R10" style="--c:#3B5BDB">
+  <div class="k-gora">
+    <span class="nr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg><b>R10</b></span>
+    <div class="k-tyt">
+      <h3>Dębicz: „12 Dreams for Piano” w Blue Note</h3>
+      <p class="kiedy">nd 22.11, 19:00 · Blue Note, ul. Kościuszki 79</p>
+    </div>
+  </div>
+  <div class="badges"><span class="b typ">koncert</span><span class="b weekend">weekend</span><span class="powaga" title="powaga"><i class="on"></i><i class="on"></i><i></i><em>pół na pół</em></span></div>
+  <p class="opis">Solo fortepian: filmowo-klasyczne utwory o snach z albumu „12 Dreams for Piano”; klub od 18:00.</p><p class="kup">Bilety kup do czwartek 12 lis. (zostało 14 dni)</p><p class="zajawka">Niedziela na wyciszenie: wcześniej spacer po Starym Rynku, gdzie od 21.11 stoi Betlejem Poznańskie, potem fortepian o snach.</p>
+  <div class="linki"><a class="btn" href="https://bluenote.pl/kalendarz/aleksander-debicz-12-dreams-for-piano/" target="_blank" rel="noopener">Strona wydarzenia</a><a class="btn" href="https://www.eventim.pl/noapp/event/22105837/?affiliate=GTP" target="_blank" rel="noopener">Bilety</a></div>
+  <div class="akcje">
+    <button type="button" class="wybierz" data-cmd="R10">Wybieram</button>
+    <div class="oceny-box"><p class="mala">Po randce, oczami Ani:</p><div class="ocena" data-k="E"><span>Wydarzenie</span><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button><button type="button" data-v="3">3</button><button type="button" data-v="4">4</button><button type="button" data-v="5">5</button></div><div class="ocena" data-k="O"><span>Otoczka</span><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button><button type="button" data-v="3">3</button><button type="button" data-v="4">4</button><button type="button" data-v="5">5</button></div>
+      <button type="button" class="kopiuj" data-r="10" disabled>Kopiuj ocenę</button></div>
+  </div>
+</article>
+
+<article class="karta tydzien przed" id="R11" style="--c:#3B5BDB">
+  <div class="k-gora">
+    <span class="nr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg><b>R11</b></span>
+    <div class="k-tyt">
+      <h3>Nils Petter Molvær: trąbka i elektronika</h3>
+      <p class="kiedy">wt 24.11, 20:00 · Aula NOVA</p>
+    </div>
+  </div>
+  <div class="badges"><span class="b typ">koncert</span><span class="b tydzien">w tygodniu</span><span class="powaga" title="powaga"><i class="on"></i><i class="on"></i><i></i><em>pół na pół</em></span></div>
+  <p class="opis">Norweski pionier nu-jazzu, trąbka i elektronika; materiał z płyty „Be Quiet”.</p><p class="kup">Bilety kup do sobota 14 lis. (zostało 16 dni)</p><p class="zajawka">Muzyka z płyty „Be Quiet”: nastrojowa, do zamknięcia oczu. Przed koncertem kolacja, po nim cisza w aucie, bez radia.</p>
+  <div class="linki"><a class="btn" href="https://www.ebilet.pl/muzyka/jazz-blues/nils-petter-molvaer" target="_blank" rel="noopener">Strona wydarzenia</a></div>
+  <div class="akcje">
+    <button type="button" class="wybierz" data-cmd="R11">Wybieram</button>
+    <div class="oceny-box"><p class="mala">Po randce, oczami Ani:</p><div class="ocena" data-k="E"><span>Wydarzenie</span><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button><button type="button" data-v="3">3</button><button type="button" data-v="4">4</button><button type="button" data-v="5">5</button></div><div class="ocena" data-k="O"><span>Otoczka</span><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button><button type="button" data-v="3">3</button><button type="button" data-v="4">4</button><button type="button" data-v="5">5</button></div>
+      <button type="button" class="kopiuj" data-r="11" disabled>Kopiuj ocenę</button></div>
+  </div>
+</article>
+
+<article class="karta weekend przed" id="R12" style="--c:#3B5BDB">
+  <div class="k-gora">
+    <span class="nr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg><b>R12</b></span>
+    <div class="k-tyt">
+      <h3>Gerald Clayton Trio w Blue Note</h3>
+      <p class="kiedy">sob 28.11, 19:00 · Blue Note, ul. Kościuszki 79</p>
+    </div>
+  </div>
+  <div class="badges"><span class="b typ">koncert</span><span class="b weekend">weekend</span><span class="powaga" title="powaga"><i class="on"></i><i class="on"></i><i></i><em>pół na pół</em></span></div>
+  <p class="opis">Trio fortepianowe z USA: Clayton, Joe Sanders, Jeff Ballard; klub od 18:00.</p><p class="opis">Wystawa młodych artystów, wstęp wolny.</p><p class="kup">Bilety kup do środa 18 lis. (zostało 20 dni)</p><p class="zajawka">Po południu ostatni weekend darmowej wystawy młodych w Arsenale, wieczorem trio fortepianowe z USA.</p>
+  <div class="linki"><a class="btn" href="https://bluenote.pl/kalendarz/gerald-clayton-trio/" target="_blank" rel="noopener">Strona wydarzenia</a><a class="btn" href="https://arsenal.art.pl/wystawa/bieguny-dialogi-mlodych-inny-edycja-9/" target="_blank" rel="noopener">Strona wydarzenia</a></div>
+  <div class="akcje">
+    <button type="button" class="wybierz" data-cmd="R12">Wybieram</button>
+    <div class="oceny-box"><p class="mala">Po randce, oczami Ani:</p><div class="ocena" data-k="E"><span>Wydarzenie</span><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button><button type="button" data-v="3">3</button><button type="button" data-v="4">4</button><button type="button" data-v="5">5</button></div><div class="ocena" data-k="O"><span>Otoczka</span><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button><button type="button" data-v="3">3</button><button type="button" data-v="4">4</button><button type="button" data-v="5">5</button></div>
+      <button type="button" class="kopiuj" data-r="12" disabled>Kopiuj ocenę</button></div>
+  </div>
+</article>
+
+<article class="karta weekend przed" id="R13" style="--c:#3B5BDB">
+  <div class="k-gora">
+    <span class="nr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg><b>R13</b></span>
+    <div class="k-tyt">
+      <h3>Mikołajki przy świecach: Christmas Classics</h3>
+      <p class="kiedy">nd 6.12, 17:00 · Teatr Muzyczny w Poznaniu</p>
+    </div>
+  </div>
+  <div class="badges"><span class="b typ">koncert</span><span class="b weekend">weekend</span><span class="powaga" title="powaga"><i class="on"></i><i></i><i></i><em>na luzie</em></span></div>
+  <p class="opis">Kwartet smyczkowy gra świąteczne klasyki przy świecach, w same Mikołajki; po rozpoczęciu nie wpuszczają.</p><p class="kup">Bilety kup do niedziela 22 lis. (zostało 24 dni)</p><p class="zajawka">Mikołajki: mały prezent schowany w kieszeni płaszcza, potem świece i kwartet. Po koncercie jarmark na Targach albo Betlejem na rynku.</p>
+  <div class="linki"><a class="btn" href="https://www.ebilet.pl/muzyka/pozostale/christmas-classics?partner=tenpoznan" target="_blank" rel="noopener">Strona wydarzenia</a></div>
+  <div class="akcje">
+    <button type="button" class="wybierz" data-cmd="R13">Wybieram</button>
+    <div class="oceny-box"><p class="mala">Po randce, oczami Ani:</p><div class="ocena" data-k="E"><span>Wydarzenie</span><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button><button type="button" data-v="3">3</button><button type="button" data-v="4">4</button><button type="button" data-v="5">5</button></div><div class="ocena" data-k="O"><span>Otoczka</span><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button><button type="button" data-v="3">3</button><button type="button" data-v="4">4</button><button type="button" data-v="5">5</button></div>
+      <button type="button" class="kopiuj" data-r="13" disabled>Kopiuj ocenę</button></div>
+  </div>
+</article>
+
+<article class="karta tydzien trwa" id="R6" style="--c:#C2552B">
+  <div class="k-gora">
+    <span class="nr"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="m3 16 5-5 4 4 3-3 6 6"/><circle cx="15.5" cy="8.5" r="1.5"/></svg><b>R6</b></span>
+    <div class="k-tyt">
+      <h3>Wystawa „Świat jak zielnik” w CK Zamek</h3>
+      <p class="kiedy">wt–nd 12–19, do 6.12 · CK Zamek</p>
+    </div>
+  </div>
+  <div class="badges"><span class="b typ">wystawa</span><span class="b tydzien">w tygodniu</span><span class="powaga" title="powaga"><i class="on"></i><i></i><i></i><em>na luzie</em></span></div>
+  <p class="opis">Przyroda w sztuce od baroku po współczesność; przy wystawie cykl etnobotanicznych spacerów dla dorosłych.</p>
+  <div class="linki"><a class="btn" href="https://ckzamek.pl" target="_blank" rel="noopener">Strona wydarzenia</a></div>
+  <div class="akcje">
+    <button type="button" class="wybierz" data-cmd="R6">Wybieram</button>
+    <div class="oceny-box"><p class="mala">Po randce, oczami Ani:</p><div class="ocena" data-k="E"><span>Wydarzenie</span><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button><button type="button" data-v="3">3</button><button type="button" data-v="4">4</button><button type="button" data-v="5">5</button></div><div class="ocena" data-k="O"><span>Otoczka</span><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button><button type="button" data-v="3">3</button><button type="button" data-v="4">4</button><button type="button" data-v="5">5</button></div>
+      <button type="button" class="kopiuj" data-r="6" disabled>Kopiuj ocenę</button></div>
+  </div>
+</article>
+
+<article class="karta tydzien dowolny" id="R5" style="--c:#2B8A3E">
+  <div class="k-gora">
+    <span class="nr"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l3 3M15 8l2 2"/></svg><b>R5</b></span>
+    <div class="k-tyt">
+      <h3>Escape room „Zemsta Umarlaka” (DreamScape)</h3>
+      <p class="kiedy">dowolny dzień, do rezerwacji · Święty Marcin 43/3p</p>
+    </div>
+  </div>
+  <div class="badges"><span class="b typ">escape room</span><span class="b tydzien">w tygodniu</span><span class="powaga" title="powaga"><i class="on"></i><i></i><i></i><em>na luzie</em></span></div>
+  <p class="opis">Pirackie Nassau XVIII w., kilka przestrzeni, dużo techniki, mało kłódek; recenzja 05.2026: świetny także dla 2 osób, nie horror.</p>
+  <div class="linki"><a class="btn" href="https://www.reviewtheroom.co.uk/dreamscape-escape-room-deadmans-revenge-poznan/" target="_blank" rel="noopener">Strona wydarzenia</a></div>
+  <div class="akcje">
+    <button type="button" class="wybierz" data-cmd="R5">Wybieram</button>
+    <div class="oceny-box"><p class="mala">Po randce, oczami Ani:</p><div class="ocena" data-k="E"><span>Wydarzenie</span><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button><button type="button" data-v="3">3</button><button type="button" data-v="4">4</button><button type="button" data-v="5">5</button></div><div class="ocena" data-k="O"><span>Otoczka</span><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button><button type="button" data-v="3">3</button><button type="button" data-v="4">4</button><button type="button" data-v="5">5</button></div>
+      <button type="button" class="kopiuj" data-r="5" disabled>Kopiuj ocenę</button></div>
+  </div>
+</article></div>
+
+  
+
+  <footer>Wybór i oceny kopiują się jako komenda (np. <code>R3</code> albo <code>R3 E4 O5</code>). Wklej ją w wiadomości do bota na Discordzie, a system dopisze ją do nauki.</footer>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+(function(){
+  var toast=document.getElementById('toast'), tt;
+  function pokaz(t){toast.textContent=t;toast.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){toast.classList.remove('on')},2600)}
+  function kopiuj(t){
+    function ok(){pokaz('Skopiowane: '+t+'. Wklej na Discordzie')}
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(ok,stary)}else{stary()}
+    function stary(){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');ok()}catch(e){pokaz('Komenda: '+t)}a.remove()}
+  }
+  function blysk(){var id=location.hash.slice(1);var el=id&&document.getElementById(id);if(!el)return;el.classList.add('flash');setTimeout(function(){el.classList.remove('flash')},1600)}
+  window.addEventListener('hashchange',blysk);
+  var serwer=location.protocol.indexOf('http')===0 && /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+  var lw=document.querySelector('.legenda-w'); if(lw && innerWidth<720) lw.removeAttribute('open');
+  document.querySelectorAll('.nb-form').forEach(function(f){
+    if(!serwer){f.classList.add('off');var i=document.createElement('p');i.className='nb-info';i.textContent='Zapis działa, gdy strona jest otwarta przez serwer (python3 serwer.py).';f.appendChild(i);return}
+    f.addEventListener('submit',function(e){e.preventDefault();
+      var dane={};new FormData(f).forEach(function(v,k){dane[k]=v});
+      fetch(f.dataset.api,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(dane)})
+        .then(function(r){if(!r.ok)throw 0;return r.json()})
+        .then(function(){pokaz('Zapisane');setTimeout(function(){location.hash='notatnik';location.reload()},600)})
+        .catch(function(){pokaz('Nie zapisało się. Czy serwer działa?')});
+    });
+  });
+  document.querySelectorAll('.wybierz').forEach(function(b){b.addEventListener('click',function(){kopiuj(b.dataset.cmd)})});
+  document.querySelectorAll('.karta').forEach(function(k){
+    var stan={}, kop=k.querySelector('.kopiuj');
+    k.querySelectorAll('.ocena').forEach(function(o){
+      o.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){
+        o.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)});
+        stan[o.dataset.k]=b.dataset.v; kop.disabled=!(stan.E&&stan.O);
+      })});
+    });
+    kop.addEventListener('click',function(){kopiuj('R'+kop.dataset.r+' E'+stan.E+' O'+stan.O)});
+  });
+})();
+</script>
+
+<style>
+#pub-lightbox-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:99999;align-items:center;justify-content:center;cursor:zoom-out}
+#pub-lightbox-overlay.open{display:flex}
+#pub-lightbox-overlay img{max-width:92vw;max-height:88vh;object-fit:contain;border-radius:4px;box-shadow:0 8px 40px rgba(0,0,0,.6)}
+#pub-lightbox-close{position:fixed;top:16px;right:20px;font-size:36px;color:#fff;cursor:pointer;line-height:1;user-select:none;text-shadow:0 2px 8px rgba(0,0,0,.8)}
+</style>
+<div id="pub-lightbox-overlay"><span id="pub-lightbox-close">&times;</span><img id="pub-lightbox-img" src="" alt=""></div>
+<script>
+(function(){
+  var ov=document.getElementById('pub-lightbox-overlay');
+  var im=document.getElementById('pub-lightbox-img');
+  document.querySelectorAll('a.pub-lightbox-trigger').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      var img=a.querySelector('img');
+      if(img){im.src=img.src;ov.classList.add('open');}
+    });
+  });
+  document.getElementById('pub-lightbox-close').addEventListener('click',function(){ov.classList.remove('open');im.src='';});
+  ov.addEventListener('click',function(e){if(e.target===ov){ov.classList.remove('open');im.src='';}});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){ov.classList.remove('open');im.src='';}});
+})();
+</script>
+</body>
+</html>
